@@ -1,49 +1,57 @@
 ﻿@model List<Categoria>
-<div class="container">
-    <!--padding bottom/ padding top-->
-    <div class="row pt-4 pb-3">
-        <div class="col-6">
-            <h2 class="text-primary">Lista de Categorias</h2>
-        </div>
-        <div class="col-6 text-end">
-            <a asp-controller="Categoria" asp-action="Create" class="btn btn-primary">Crear Nueva Categoría</a>
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Lista de Categorias</h2>
+            </div>
         </div>
     </div>
+    <div class="card-body p-4">
+        <!--padding bottom/ padding top-->
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Categoria" asp-action="Create" class="btn btn-primary">Crear Nueva Categoría</a>
+            </div>
+        </div>
 
 
 
-<table class="table table-bordered table-striped">
+        <table class="table table-bordered table-striped">
 
-    <thead>
-    <tr>
-        <th>Nombre Categoria</th>
-        <th>Display Order</th>
-        <th></th>
-    </tr>
-    </thead>
+            <thead>
+                <tr>
+                    <th>Nombre Categoria</th>
+                    <th>Display Order</th>
+                    <th></th>
+                </tr>
+            </thead>
 
-    <tbody>
-        <!--Se mostrara de forma ascendente-->
-        @foreach(var obj in Model.OrderBy(u=>u.DisplayOrder))
-        {         
-        <tr>
-            <td>@obj.nombre</td>
-            <td>@obj.DisplayOrder</td>
-            <td>
-                <div class="w-75 btn-group" role="group">
-                    <!--este id viene del controlador, el metdo editar el parametor-->
-                    <a asp-controller="Categoria" asp-action="Edit" class="btn btn-primary mx-2"
-                           asp-route-id="@obj.idCategoria">
-                    Editar</a>
-                    <a asp-controller="Categoria" asp-action="Delete" class="btn btn-primary mx-2"
-                           asp-route-id="@obj.idCategoria">Eliminar</a>
-                </div>
-            </td>
-        </tr>
-        }
-    </tbody>
+            <tbody>
+                <!--Se mostrara de forma ascendente-->
+                @foreach (var obj in Model.OrderBy(u => u.DisplayOrder))
+                {
+                    <tr>
+                        <td>@obj.nombre</td>
+                        <td>@obj.DisplayOrder</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <!--este id viene del controlador, el metdo editar el parametor-->
+                                <a asp-controller="Categoria" asp-action="Edit" class="btn btn-primary mx-2"
+                               asp-route-id="@obj.idCategoria">
+                                    Editar
+                                </a>
+                                <a asp-controller="Categoria" asp-action="Delete" class="btn btn-primary mx-2"
+                               asp-route-id="@obj.idCategoria">Eliminar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
 
 
-</table>
-
+        </table>
+    </div>
 </div>

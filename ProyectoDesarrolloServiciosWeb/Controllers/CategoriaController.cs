@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProyectoDesarrolloServiciosWeb.Data;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 using ProyectoDesarrolloServiciosWeb.Models;
 
 namespace ProyectoDesarrolloServiciosWeb.Controllers

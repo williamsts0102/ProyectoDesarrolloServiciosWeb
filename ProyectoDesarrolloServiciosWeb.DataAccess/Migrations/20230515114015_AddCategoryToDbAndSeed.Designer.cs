@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProyectoDesarrolloServiciosWeb.Data;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 
 #nullable disable
 
-namespace ProyectoDesarrolloServiciosWeb.Migrations
+namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230514070553_AddCategoriaTableToDb")]
-    partial class AddCategoriaTableToDb
+    [Migration("20230515114015_AddCategoryToDbAndSeed")]
+    partial class AddCategoryToDbAndSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,11 +37,32 @@ namespace ProyectoDesarrolloServiciosWeb.Migrations
 
                     b.Property<string>("nombre")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(38)
+                        .HasColumnType("nvarchar(38)");
 
                     b.HasKey("idCategoria");
 
                     b.ToTable("categorias");
+
+                    b.HasData(
+                        new
+                        {
+                            idCategoria = 1,
+                            DisplayOrder = 1,
+                            nombre = "Hamburguesas"
+                        },
+                        new
+                        {
+                            idCategoria = 2,
+                            DisplayOrder = 2,
+                            nombre = "Pizas"
+                        },
+                        new
+                        {
+                            idCategoria = 3,
+                            DisplayOrder = 3,
+                            nombre = "Papas"
+                        });
                 });
 #pragma warning restore 612, 618
         }

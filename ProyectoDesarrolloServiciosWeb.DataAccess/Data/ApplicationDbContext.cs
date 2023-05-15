@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProyectoDesarrolloServiciosWeb.Models;
+﻿using ProyectoDesarrolloServiciosWeb.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace ProyectoDesarrolloServiciosWeb.Data
+namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
 {
     /*para decirle que la aplicacion usara EntityFrameworkCore,proporciona acceso y gestion 
      a una base de datos Entity..*/
