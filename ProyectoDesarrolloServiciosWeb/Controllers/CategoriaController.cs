@@ -37,7 +37,7 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
             {
                 _db.categorias.Add(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Categoría creada con éxito";
+                TempData["success"] = "Categoría creada con éxito"; /*Para mandar un valor temporal en este caso un texto*/
                 return RedirectToAction("Index");
             }
             return View();
@@ -69,7 +69,7 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
             {
                 _db.categorias.Update(obj);
                 _db.SaveChanges();
-                TempData["success"] = "Categoría editada con éxito";
+                TempData["success"] = "Categoría editada con éxito";/*Para mandar un valor temporal en este caso un texto*/
                 return RedirectToAction("Index");
             }
 
@@ -105,7 +105,7 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
             }
             _db.categorias.Remove(obj);
             _db.SaveChanges();
-            TempData["success"] = "Categoría eliminada con éxito";
+            TempData["success"] = "Categoría eliminada con éxito";/*Para mandar un valor temporal en este caso un texto*/
             return RedirectToAction("Index");
         }
         

@@ -1,5 +1,7 @@
 ﻿@if (TempData["success"] != null)
 {
+    @*Esto lo agregamos para poder llamar a la tostadora y nos pueda salir el mensaje verde cuando 
+    una accion como crear,actualizar o eliminar se completo*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
@@ -8,9 +10,10 @@
 }
 @if (TempData["error"] != null)
 {
+    @*De igual manera que se explica arriba pero para los errores*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-        toastr.success('@TempData["error"]');
+        toastr.error('@TempData["error"]');
     </script>
 }
