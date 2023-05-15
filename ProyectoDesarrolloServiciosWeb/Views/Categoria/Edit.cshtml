@@ -1,7 +1,9 @@
 ﻿@model Categoria
 
 <form method="post">
-    <!--relleno de 3px en todos los lados, margentop-4px-->
+    <!--relleno de 3px en todos los lados, margentop-4px
+    <!--se tiene que especificar el nombre el id si es diferente a Id-->
+    <input asp-for="idCategoria" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2>Actualizar Categoría</h2>

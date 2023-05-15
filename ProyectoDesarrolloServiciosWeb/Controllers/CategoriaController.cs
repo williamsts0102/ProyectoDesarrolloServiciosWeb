@@ -26,17 +26,18 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
 
         [HttpPost]
         public IActionResult Create(Categoria obj)
-        {   /*
+        {
             if (obj.nombre == obj.DisplayOrder.ToString())
             {
-                el name es porque asi se llama el atributo
+                //el name es porque asi se llama el atributo
                 ModelState.AddModelError("nombre", "El orden de visualización no puede ser igual que el Nombre");
-            }*/
+            }
 
             if (ModelState.IsValid)
             {
                 _db.categorias.Add(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Categoría creada con éxito";
                 return RedirectToAction("Index");
             }
             return View();
@@ -68,6 +69,7 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
             {
                 _db.categorias.Update(obj);
                 _db.SaveChanges();
+                TempData["success"] = "Categoría editada con éxito";
                 return RedirectToAction("Index");
             }
 
@@ -83,7 +85,7 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
                 return NotFound();
             }
 
-            Categoria c = _db.categorias.Find(id);
+            Categoria? c = _db.categorias.Find(id);
             if (c == null)
             {
                 return NotFound();
@@ -102,8 +104,9 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
                 return NotFound();
             }
             _db.categorias.Remove(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
+            _db.SaveChanges();
+            TempData["success"] = "Categoría eliminada con éxito";
+            return RedirectToAction("Index");
         }
         
 
