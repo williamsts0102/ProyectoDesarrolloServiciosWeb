@@ -14,7 +14,7 @@ namespace ProyectoDesarrolloServiciosWeb.Models
         [Required(ErrorMessage = "El nombre de la categoria es obligatorio")]
         [MaxLength(38)]
         [DisplayName("Nombre de Categoria")]
-        public string? nombre { get; set; }
+        public string nombre { get; set; }
 
         /*para mostrar el orden en que se mostraran los campos*/
         [DisplayName("Orden de Visualización")]

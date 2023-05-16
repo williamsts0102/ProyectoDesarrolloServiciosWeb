@@ -2,8 +2,9 @@
 using ProyectoDesarrolloServiciosWeb.Models;
 using System.Diagnostics;
 
-namespace ProyectoDesarrolloServiciosWeb.Controllers
+namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
 {
+    [Area("Cliente")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

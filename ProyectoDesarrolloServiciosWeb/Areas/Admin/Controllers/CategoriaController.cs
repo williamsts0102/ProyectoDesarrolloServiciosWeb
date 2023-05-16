@@ -1,20 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
 
-namespace ProyectoDesarrolloServiciosWeb.Controllers
+namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoriaController : Controller
     {
         /*esta variable solo se puede asignar en el constructor de la clase*/
-        private readonly ApplicationDbContext _db;
-        public CategoriaController(ApplicationDbContext db){
-            _db =db;
+        /*camabiaremos*/
+        private readonly IUnitOfWork _unit;
+        public CategoriaController(IUnitOfWork unit)
+        {
+            _unit = unit;
         }
 
         public IActionResult Index()
         {
-            List<Categoria> listaCategoria = _db.categorias.ToList();
+            List<Categoria> listaCategoria = _unit.Categoria.GetAll().ToList();
 
             return View(listaCategoria);
         }
@@ -35,8 +39,8 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
 
             if (ModelState.IsValid)
             {
-                _db.categorias.Add(obj);
-                _db.SaveChanges();
+                _unit.Categoria.Add(obj);
+                _unit.Save();
                 TempData["success"] = "Categoría creada con éxito"; /*Para mandar un valor temporal en este caso un texto*/
                 return RedirectToAction("Index");
             }
@@ -44,17 +48,17 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
         }
 
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int? idCategoria)
         {
-            if(id==null || id==0)
+            if (idCategoria == null || idCategoria == 0)
             {
                 /*indica que la solicitud no se ha encontrado*/
                 return NotFound();
             }
 
-            Categoria? c = _db.categorias.Find(id);
-            
-            if(c==null)
+            Categoria? c = _unit.Categoria.Get(u => u.idCategoria == idCategoria);
+
+            if (c == null)
             {
                 return NotFound();
             }
@@ -67,8 +71,8 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.categorias.Update(obj);
-                _db.SaveChanges();
+                _unit.Categoria.Update(obj);
+                _unit.Save();
                 TempData["success"] = "Categoría editada con éxito";/*Para mandar un valor temporal en este caso un texto*/
                 return RedirectToAction("Index");
             }
@@ -77,15 +81,15 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
         }
 
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? idCategoria)
         {
-            if (id == null || id == 0)
+            if (idCategoria == null || idCategoria == 0)
             {
                 /*indica que la solicitud no se ha encontrado*/
                 return NotFound();
             }
 
-            Categoria? c = _db.categorias.Find(id);
+            Categoria? c = _unit.Categoria.Get(u => u.idCategoria == idCategoria);
             if (c == null)
             {
                 return NotFound();
@@ -94,21 +98,21 @@ namespace ProyectoDesarrolloServiciosWeb.Controllers
             return View(c);
         }
 
-        [HttpPost,ActionName("Delete")]
-        public IActionResult DeletePOST(int? id)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? idCategoria)
         {
-            Categoria? obj = _db.categorias.Find(id);
+            Categoria? obj = _unit.Categoria.Get(u => u.idCategoria == idCategoria);
 
             if (obj == null)
             {
                 return NotFound();
             }
-            _db.categorias.Remove(obj);
-            _db.SaveChanges();
+            _unit.Categoria.Remove(obj);
+            _unit.Save();
             TempData["success"] = "Categoría eliminada con éxito";/*Para mandar un valor temporal en este caso un texto*/
             return RedirectToAction("Index");
         }
-        
+
 
     }
 }

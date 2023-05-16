@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Repository;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,12 @@ builder.Services.AddControllersWithViews();
 //especificar que se utilizara sqlServer, obtiene la cadena de conexion
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+/*agregar conexion para categoria*/
+//builder.Services.AddScoped<ICategoriaRepository , CategoriaRepository > ();
+
+/*con la nueva unidad para que el codigo este mas limpio*/
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
@@ -30,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Cliente}/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
