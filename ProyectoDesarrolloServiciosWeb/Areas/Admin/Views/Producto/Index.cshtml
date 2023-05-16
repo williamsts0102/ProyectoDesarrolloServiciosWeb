@@ -19,7 +19,7 @@
 
 
 
-        <table class="table table-bordered table-striped">
+        <table id="tblData" class="table table-bordered table-striped" style="width:100%">
 
             <thead>
                 <tr>
@@ -27,35 +27,13 @@
                     <th>Descripcion</th>
                     <th>Precio</th>
                     <th>Categoria</th>
+                    <th></th>
                 </tr>
             </thead>
-
-            <tbody>
-                <!--Se mostrara de forma ascendente-->
-                @foreach (var obj in Model)
-                {
-                    <tr>
-                        <td>@obj.nombreProducto</td>
-                        <td>@obj.descripcion</td>
-                        <td>@obj.precio</td>
-                        
-                        <td>@obj.Categoria.nombre</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <!--este id viene del controlador, el metdo editar el parametor-->
-                                <a asp-controller="Producto" asp-action="Upsert" class="btn btn-primary mx-2"
-                                    asp-route-idProducto="@obj.idProducto">
-                                    Editar
-                                </a>
-                                <a asp-controller="Producto" asp-action="Delete" class="btn btn-primary mx-2"
-                               asp-route-idProducto="@obj.idProducto">Eliminar</a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-
-
         </table>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}

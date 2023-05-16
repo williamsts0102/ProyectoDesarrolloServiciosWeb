@@ -130,6 +130,20 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
             return Json(new { data = listaProducto });
         }
 
+        [HttpDelete]
+        public IActionResult DeletePro(int? id)
+        {
+            var productoToBeDeleted = _unit.Producto.Get(u => u.idProducto == id);
+            if (productoToBeDeleted == null)
+            {
+                return Json(new {success = false , messsage = "Error al intentar eliminar."});
+            }
+            _unit.Producto.Remove(productoToBeDeleted);
+            _unit.Save();
+            
+            return Json(new { success = true , message = "Eliminado con exito." });
+        }
+
         #endregion
 
     }

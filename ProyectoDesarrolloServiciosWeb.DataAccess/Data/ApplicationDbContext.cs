@@ -1,11 +1,12 @@
 ﻿using ProyectoDesarrolloServiciosWeb.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
 {
     /*para decirle que la aplicacion usara EntityFrameworkCore,proporciona acceso y gestion 
      a una base de datos Entity..*/
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         /*constructor*/
         /*el constructor recibe un parametro options, este parametro recibe como debe establecerse
@@ -25,6 +26,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
          podemos personalizar como crear una nueva categoria*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Categoria>().HasData(
                 new Categoria { idCategoria = 1, nombre = "Hamburguesas", DisplayOrder = 1 },
                 new Categoria { idCategoria = 2, nombre = "Pizas", DisplayOrder = 2 },
