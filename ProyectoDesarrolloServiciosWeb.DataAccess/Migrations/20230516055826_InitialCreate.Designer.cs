@@ -11,7 +11,7 @@ using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230516002542_InitialCreate")]
+    [Migration("20230516055826_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

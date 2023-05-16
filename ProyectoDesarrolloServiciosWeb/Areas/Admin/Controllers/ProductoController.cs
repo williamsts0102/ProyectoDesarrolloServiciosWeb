@@ -57,10 +57,21 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _unit.Producto.Add(productvm.producto);
-                _unit.Save();
-                TempData["success"] = "Producto creada con éxito"; /*Para mandar un valor temporal en este caso un texto*/
-                return RedirectToAction("Index");
+                if (productvm.producto.idProducto==0)
+                {
+                    _unit.Producto.Add(productvm.producto);
+                    _unit.Save();
+                    TempData["success"] = "Producto creada con éxito"; /*Para mandar un valor temporal en este caso un texto*/
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    _unit.Producto.Update(productvm.producto);
+                    _unit.Save();
+                    TempData["success"] = "Producto actualizado con éxito"; /*Para mandar un valor temporal en este caso un texto*/
+                    return RedirectToAction("Index");
+                }
+                
             }
             else
             {
@@ -108,7 +119,5 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
             TempData["success"] = "Producto eliminada con éxito";/*Para mandar un valor temporal en este caso un texto*/
             return RedirectToAction("Index");
         }
-
-
     }
 }
