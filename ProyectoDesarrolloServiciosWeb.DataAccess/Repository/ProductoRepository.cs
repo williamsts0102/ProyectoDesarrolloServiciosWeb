@@ -19,7 +19,14 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
 
         public void Update(Producto producto)
         {
-            _db.Update(producto);
+            
+            var objFromDb = _db.producto.FirstOrDefault(u=>u.idProducto== producto.idProducto);
+            if(objFromDb != null) { 
+                objFromDb.nombreProducto=producto.nombreProducto;
+                objFromDb.descripcion=producto.descripcion;
+                objFromDb.precio = producto.precio;
+                objFromDb.categoriaId = producto.categoriaId;
+            }
         }
     }
 }

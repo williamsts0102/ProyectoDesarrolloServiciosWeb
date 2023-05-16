@@ -19,7 +19,8 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Producto> listaProducto = _unit.Producto.GetAll().ToList();
+            /*categoria es de la entidad*/
+            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties:"Categoria").ToList();
             
             return View(listaProducto);
         }
@@ -119,5 +120,17 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
             TempData["success"] = "Producto eliminada con éxito";/*Para mandar un valor temporal en este caso un texto*/
             return RedirectToAction("Index");
         }
+
+        #region API CALLS
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties: "Categoria").ToList();
+            return Json(new { data = listaProducto });
+        }
+
+        #endregion
+
     }
 }
