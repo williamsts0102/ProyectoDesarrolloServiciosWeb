@@ -1,12 +1,13 @@
 ﻿using ProyectoDesarrolloServiciosWeb.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
 {
     /*para decirle que la aplicacion usara EntityFrameworkCore,proporciona acceso y gestion 
      a una base de datos Entity..*/
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         /*constructor*/
         /*el constructor recibe un parametro options, este parametro recibe como debe establecerse
@@ -22,6 +23,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
         /*para definir una propiedad que representa una tabla en la base de datos*/
         public DbSet<Producto> producto { get; set; }
 
+        /*para definir a los usuarios*/
+        public DbSet<ApplicationUser> applicationUser { get; set; }
         /*agregar datos iniciales, estamos sobreescribiendo en la base de datos DBContext, de esta manera
          podemos personalizar como crear una nueva categoria*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
