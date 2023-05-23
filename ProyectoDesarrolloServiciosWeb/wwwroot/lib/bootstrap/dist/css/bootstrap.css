@@ -101,9 +101,9 @@ body {
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
     line-height: var(--bs-body-line-height);
-    color: var(--bs-body-color);
+    color: var(--bs-dark);
     text-align: var(--bs-body-text-align);
-    background-color: var(--bs-body-bg);
+    background-color: white !important;
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -4219,7 +4219,7 @@ textarea.form-control-lg {
     --bs-navbar-brand-padding-y: 0.3125rem;
     --bs-navbar-brand-margin-end: 1rem;
     --bs-navbar-brand-font-size: 1.25rem;
-    --bs-navbar-brand-color: #222;
+    --bs-navbar-brand-color: white;
     --bs-navbar-brand-hover-color: #222;
     --bs-navbar-nav-link-padding-x: 0.5rem;
     --bs-navbar-toggler-padding-y: 0.25rem;
@@ -4255,10 +4255,11 @@ textarea.form-control-lg {
     padding-top: var(--bs-navbar-brand-padding-y);
     padding-bottom: var(--bs-navbar-brand-padding-y);
     margin-right: var(--bs-navbar-brand-margin-end);
-    font-size: var(--bs-navbar-brand-font-size);
+    font-size: 35px;
     color: var(--bs-navbar-brand-color);
     text-decoration: none;
     white-space: nowrap;
+    font-weight: 700;
 }
 
     .navbar-brand:hover, .navbar-brand:focus {
@@ -8921,7 +8922,7 @@ textarea.form-control-lg {
 
 .text-dark {
     --bs-text-opacity: 1;
-    color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
+    color: rgba(--bs-navbar-brand-color) !important;
 }
 
 .text-black {
@@ -8977,7 +8978,7 @@ textarea.form-control-lg {
 
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-primary-rgb), var(--bs-bg-opacity)) !important;
+    background-color: #ff7d00 !important;
 }
 
 .bg-secondary {

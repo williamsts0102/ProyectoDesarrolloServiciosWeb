@@ -1,30 +1,78 @@
 ﻿@model IEnumerable<Producto>
 
-<div class="row pb-3">
-    @foreach (var producto in Model)
-    {
-        <div class="col-lg-3 col-sm-6">
-            <div class="row p-2">
-                <div class="col-12 p-1">
-                    <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                        <img src="https://s6.aconvert.com/convert/p3r68-cdx67/tglrq-yxchq.jpg" class="card-img-top rounded">
-                        <div class="card-body pb-0">
-                           <div>
-                               <p class="card-title h5 text-white opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
-                               <p class="card-title text-warning text-center">@producto.descripcion</p>
-                           </div>
-                           <div class="pl-1">
-                                <p class="card-title text-white opacity-75 text-center mb-0">
-                                    Tan bajo como
-                                    <span class="text-decoration-line-through">
-                                        @producto.precio.ToString("c")
-                                    </span>
-                                </p>
-                           </div>
+<div class="body-home">
+
+    <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="
+     margin-top: 30px;">
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="1000">
+                <img src="https://cdn-images-ppys-prod.s3.amazonaws.com/media/wysiwyg/1657056604_delivery-gratis-desktop.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cdn-images-ppys-prod.s3.amazonaws.com/media/wysiwyg/1682355671_combos-pop-duo-1280x420.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://cdn-images-ppys-prod.s3.amazonaws.com/media/wysiwyg/1682355573_sabor-cajun-1280x420.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+    <div class="container-promo">
+        <div class="titulo-promo">
+            <h2 class="h2-promo">Promociones</h2>
+        </div>
+
+        <div class="imgs-promo">
+            <div class="img-promo">
+                <img src="https://cdn-images-ppys-prod.s3.amazonaws.com/media/catalog/product/f/e/festi-cajun-full-card.jpg" />
+            </div>
+            <div class="img-promo">
+                <img src="https://cdn-images-ppys-prod.s3.amazonaws.com/media/catalog/product/s/u/super-promo-cajun-card-nuevo.jpg" />
+            </div>
+        </div>
+    </div>
+
+
+    <div class="titulo-menu">
+        <h2>Menu</h2>
+    </div>
+
+    <div class="row pb-3">
+        @foreach (var producto in Model)
+        {
+            <div class="col-lg-3 col-sm-6">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                            <img src="https://s6.aconvert.com/convert/p3r68-cdx67/tglrq-yxchq.jpg" class="card-img-top rounded">
+                            <div class="card-body pb-0">
+                                <div>
+                                    <p class="card-title h5 text-white opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
+                                    <p class="card-title text-warning text-center">@producto.descripcion</p>
+                                </div>
+                                <div class="pl-1">
+                                    <p class="card-title text-white opacity-75 text-center mb-0">
+                                        Tan bajo como
+                                        <span class="text-decoration-line-through">
+                                            @producto.precio.ToString("c")
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    }
-</div> 
+        }
+    </div>
+
+</div>
