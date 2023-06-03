@@ -49,22 +49,19 @@
     <div class="row pb-3">
         @foreach (var producto in Model)
         {
-            <div class="col-lg-3 col-sm-6">
+            <div class="col-lg-3 col-sm-6" >
                 <div class="row p-2">
                     <div class="col-12 p-1">
                         <div class="card border-0 p-3 shadow border-top border-5 rounded">
-                            <img src="https://s6.aconvert.com/convert/p3r68-cdx67/tglrq-yxchq.jpg" class="card-img-top rounded">
+                            <img src="@producto.ImageUrl" class="card-img-top rounded">
                             <div class="card-body pb-0">
-                                <div>
+                                <div class="pl-1">
                                     <p class="card-title h5 text-white opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
-                                    <p class="card-title text-warning text-center">@producto.descripcion</p>
+                                    <p class="card-title text-warning text-center">Categoría: @producto.Categoria.nombre</p>
                                 </div>
                                 <div class="pl-1">
                                     <p class="card-title text-white opacity-75 text-center mb-0">
-                                        Tan bajo como
-                                        <span class="text-decoration-line-through">
-                                            @producto.precio.ToString("c")
-                                        </span>
+                                           Precio: @producto.precio.ToString("c")
                                     </p>
                                 </div>
                             </div>
