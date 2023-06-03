@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace ProyectoDesarrolloServiciosWeb.Models.ViewModels
 {
     public class ProductVM
-    {
-
+    { 
         public Producto producto { get; set; }
 
         [ValidateNever]

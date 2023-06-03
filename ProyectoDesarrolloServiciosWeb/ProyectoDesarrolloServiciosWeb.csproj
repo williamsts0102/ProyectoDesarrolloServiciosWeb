@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\**" />
+    <Compile Remove="wwwroot\img\**" />
+    <Content Remove="Controllers\**" />
+    <Content Remove="wwwroot\img\**" />
+    <EmbeddedResource Remove="Controllers\**" />
+    <EmbeddedResource Remove="wwwroot\img\**" />
+    <None Remove="Controllers\**" />
+    <None Remove="wwwroot\img\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
@@ -24,8 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\imagenes\productos\" />
   </ItemGroup>
 
 </Project>

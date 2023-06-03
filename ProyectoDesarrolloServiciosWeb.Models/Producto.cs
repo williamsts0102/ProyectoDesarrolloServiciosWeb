@@ -34,6 +34,9 @@ namespace ProyectoDesarrolloServiciosWeb.Models
         [ValidateNever]
         public Categoria Categoria { get; set; }
 
+        [ValidateNever]
+        public string ImageUrl { get; set; }
+
 
     }
 }

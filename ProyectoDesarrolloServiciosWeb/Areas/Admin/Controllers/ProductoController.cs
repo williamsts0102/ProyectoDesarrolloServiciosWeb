@@ -12,9 +12,14 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
         /*esta variable solo se puede asignar en el constructor de la clase*/
         /*camabiaremos*/
         private readonly IUnitOfWork _unit;
-        public ProductoController(IUnitOfWork unit)
+
+        /*para obtener rutas de archivos; ya que proporciona propiedades como WebRootPath y ContentRootPath*/
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ProductoController(IUnitOfWork unit, IWebHostEnvironment webHostEnvironment)
         {
             _unit = unit;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -58,21 +63,38 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (productvm.producto.idProducto==0)
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                if (file != null)
+                {
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productoPath = Path.Combine(wwwRootPath, @"imagenes\productos");
+
+                    if (!string.IsNullOrEmpty(productvm.producto.ImageUrl))
+                    {
+                        var oldImagenPath = Path.Combine(wwwRootPath, productvm.producto.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagenPath)) { System.IO.File.Delete(oldImagenPath); }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productoPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productvm.producto.ImageUrl = @"\imagenes\productos\" + fileName;
+                }
+
+                if (productvm.producto.idProducto == 0)
                 {
                     _unit.Producto.Add(productvm.producto);
-                    _unit.Save();
-                    TempData["success"] = "Producto creada con éxito"; /*Para mandar un valor temporal en este caso un texto*/
-                    return RedirectToAction("Index");
                 }
                 else
                 {
                     _unit.Producto.Update(productvm.producto);
-                    _unit.Save();
-                    TempData["success"] = "Producto actualizado con éxito"; /*Para mandar un valor temporal en este caso un texto*/
-                    return RedirectToAction("Index");
                 }
-                
+
+                _unit.Save();
+                TempData["succes"] = "Producto registrado";
+                return RedirectToAction("Index");
             }
             else
             {
@@ -83,11 +105,7 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
                 });
                 return View(productvm);
             }
-           
         }
-
-
-        
         public IActionResult Delete(int? idProducto)
         {
             if (idProducto == null || idProducto == 0)

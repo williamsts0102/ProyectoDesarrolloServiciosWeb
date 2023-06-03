@@ -43,9 +43,10 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
                 {
                     idProducto = 1,
                     nombreProducto = "Hamburguesas",
-                    descripcion = "Deliciosas hamburguesas con papas",
-                    precio = 50,
+                    descripcion = "Deliciosa combinación de carne jugosa, generalmente de res, cocinada a la parrilla o a la plancha",
+                    precio = 15,
                     categoriaId = 1,
+                    ImageUrl=""
                 },
                 new Producto
                 {
@@ -53,7 +54,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
                     nombreProducto = "Hamburguesas",
                     descripcion = "Deliciosas hamburguesas con papas",
                     precio = 50,
-                    categoriaId = 1
+                    categoriaId = 1,
+                    ImageUrl = ""
                 },
                 new Producto
                 {
@@ -61,7 +63,9 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
                     nombreProducto = "Hamburguesas",
                     descripcion = "Deliciosas hamburguesas con papas",
                     precio = 50,
-                    categoriaId = 1
+                    categoriaId = 1,
+                    /*agregamos esto y luego una migracion addImage*/
+                    ImageUrl = ""
                 },
                 new Producto
                 {
@@ -69,7 +73,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
                     nombreProducto = "Hamburguesas",
                     descripcion = "Deliciosas hamburguesas con papas",
                     precio = 50,
-                    categoriaId = 1
+                    categoriaId = 1,
+                    ImageUrl = ""
                 }
                 );
         }
