@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Producto>
+﻿    @model IEnumerable<Producto>
 
 <div class="body-home">
 
@@ -65,6 +65,11 @@
                                     </p>
                                 </div>
                             </div>
+                            <a asp-action="Details"
+                               asp-route-productoId="@producto.idProducto"
+                               class="btn btn-primary bg-gradient border-0 form-control">
+                                Detalle
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -23,6 +23,12 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
             return View(productoLista);
         }
 
+        public IActionResult Details(int productoId)
+        {
+            Producto producto = _unit.Producto.Get(u=>u.idProducto== productoId, includeProperties: "Categoria");
+            return View(producto);
+        }
+
         public IActionResult Privacy()
         {
             return View();
