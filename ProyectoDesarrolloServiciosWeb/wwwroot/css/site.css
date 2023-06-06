@@ -579,9 +579,33 @@ bg-success {
 }
 .h2-promo {
     color: black;
-    font-size:27px;
+    font-size: 40px;
+    font-family: "ChickenSans-Bold",sans-serif;
+    font-weight: 800;
 }
-.titulo-menu h2{
-    color:black;
-    font-size:27px;
+.titulo-menu h2 {
+    color: black;
+    font-size: 40px;
+    font-family: "ChickenSans-Bold",sans-serif;
+    font-weight: 800;
+}
+
+.card {
+    background-color: #ff7d00;
+}
+.text-warning{
+    color:black !important;
+}
+
+.logoser{
+    width:80px;
+}
+
+.txtnosotros {
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items: flex-start;
+    padding: 0px 20px;
+    gap:10px;
 }
