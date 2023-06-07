@@ -14,7 +14,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
          la conexion a base de datos*/
         /*esto permite que esta clase interactue con la base de datos utilizando EntityFRamework*/
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base (options){
-                
+              
         }
 
         /*para definir una propiedad que representa una tabla en la base de datos*/

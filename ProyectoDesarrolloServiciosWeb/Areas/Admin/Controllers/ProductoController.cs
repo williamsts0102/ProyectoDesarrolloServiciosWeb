@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
 using ProyectoDesarrolloServiciosWeb.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using ProyectoDesarrolloServiciosWeb.Utility;
 
 namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ProductoController : Controller
     {
         /*esta variable solo se puede asignar en el constructor de la clase*/

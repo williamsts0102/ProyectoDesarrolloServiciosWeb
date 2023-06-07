@@ -3,6 +3,8 @@ using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ProyectoDesarrolloServiciosWeb.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,17 @@ builder.Services.AddControllersWithViews();
 
 //agregar
 //especificar que se utilizara sqlServer, obtiene la cadena de conexion
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
+    options.LoginPath = $"/Identity/Account/Logout";
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
+;
 builder.Services.AddRazorPages();
 
 /*agregar conexion para categoria*/
@@ -21,6 +31,8 @@ builder.Services.AddRazorPages();
 
 /*con la nueva unidad para que el codigo este mas limpio*/
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<IEmailSender,EmailSender>();
 
 var app = builder.Build();
 
