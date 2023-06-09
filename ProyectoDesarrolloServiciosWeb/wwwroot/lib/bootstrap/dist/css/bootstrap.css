@@ -659,7 +659,10 @@ progress {
     font-size: 0.875em;
     color: #888;
 }
-
+footer {
+    border-top: 1px solid #dedede;
+    padding-top: 5%;
+}
 .container,
 .container-fluid,
 .container-xxl,
@@ -8144,6 +8147,7 @@ body {
 .w-50 {
     width: 50% !important;
 }
+
 
 .w-75 {
     width: 75% !important;
