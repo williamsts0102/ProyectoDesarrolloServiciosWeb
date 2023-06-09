@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
@@ -114,8 +116,16 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
 
 
             public string? Role { get; set; }
-
+            [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+
+            [Required]
+            public string? Nombre { get; set; }
+            public string? Direccion { get; set; }
+            public string? Ciudad { get; set; }
+            public string? CodigoPostal { get; set; }
+            public string? Telefono { get; set; }
+
         }
 
 
@@ -152,6 +162,13 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                user.Nombre = Input.Nombre;
+                user.Direccion=Input.Direccion;
+                user.Ciudad = Input.Ciudad;
+                user.CodigoPostal=Input.CodigoPostal;
+                user.Telefono = Input.Telefono;
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

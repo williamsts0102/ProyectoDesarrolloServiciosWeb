@@ -10,7 +10,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
     {
         ICategoriaRepository Categoria { get; }
         IProductoRepository Producto { get; }
-
+        ICompanyRepository Company { get; }
         void Save();
 
     }

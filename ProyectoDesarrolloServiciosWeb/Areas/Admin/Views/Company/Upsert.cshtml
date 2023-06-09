@@ -1,0 +1,102 @@
+﻿@model ProductVM
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.producto.idProducto!=0?"Actualizar":"Crear") Producto</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+           <input asp-for="producto.idProducto" hidden />
+           <input asp-for="producto.ImageUrl" hidden/>
+           <div class="row">
+               <div class="col-10">
+                    <div class="border p-3">
+
+                        <!--porque tambien va a editar-->
+                        <!--para mostrar todos los errores que hubieron en el formulario-->
+                        <!--<div asp-validation-summary="All"></div>-->
+
+                        <div class="form-floating py-2 col-12">
+                            <!--lo que se va a guardar, donde -->
+                            <input asp-for="producto.nombreProducto" type="text" class="form-control border-0 shadow" />
+                            <label asp-for="producto.nombreProducto" class="ms-2"></label>
+                            <span asp-validation-for="producto.nombreProducto" class="text-danger"></span>
+                        </div>
+
+                        <div class="py-2 col-12">
+                            <label asp-for="producto.descripcion" class="ms-2 text-muted"></label>
+                            <textarea asp-for="producto.descripcion" type="text" class="form-control border-0 shadow">
+                        </textarea>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <input asp-for="producto.precio" type="text" class="form-control border-0 shadow" />
+                            <label asp-for="producto.precio" class="ms-2"></label>
+                            <!--para que se muestre el mensaje-->
+                            <span asp-validation-for="producto.precio" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-floating py-2 col-12">
+                            <select asp-for="@Model.producto.categoriaId" asp-items="@Model.listacat" type="text" class="form-select border-0 shadow">
+                                <option disbale selected>Seleccionar Categoria</option>
+                            </select>
+                            <label asp-for="producto.categoriaId" class="ms-2"></label>
+                            <!--para que se muestre el mensaje-->
+                            <span asp-validation-for="producto.Categoria.nombre" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating py-2 col-12">
+                            <input type="file" name="file" class="form-control border-0 shadow" multiple />
+                            <label asp-for="producto.ImageUrl" class="ms-2"></label>
+                        </div>
+                        <div class="row pt-2">
+                            <div class="col-6 col-md-3">
+                                @if (Model.producto.idProducto != 0)
+                                {
+                                    <button type="submit" class="btn btn-primary" style="width:150px">Actualizar</button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary" style="width:150px">Crear</button>
+                                }
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <a asp-controller="Producto" asp-action="Index" class="btn btn-outline-primary style="width:150px">
+                                    Regresar al Listado
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+                <div class="col-2">
+                    <img src="@Model.producto.ImageUrl" width="100%" 
+                    style="border-radius:5px; border:1px solid #bbb9b9"
+                    />
+                </div>
+           </div>
+
+           
+            <!--relleno de 3px en todos los lados, margentop-4px hola -->
+        
+       
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            language: 'es',
+            plugins: 'anchor autolink charmap codesample emoticons  lists   table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough |  align lineheight | numlist bullist indent outdent',
+        });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

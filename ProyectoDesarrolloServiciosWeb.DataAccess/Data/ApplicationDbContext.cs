@@ -23,6 +23,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
         /*para definir una propiedad que representa una tabla en la base de datos*/
         public DbSet<Producto> producto { get; set; }
 
+        public DbSet<Company> company { get; set; } 
+
         /*para definir a los usuarios*/
         public DbSet<ApplicationUser> applicationUser { get; set; }
         /*agregar datos iniciales, estamos sobreescribiendo en la base de datos DBContext, de esta manera

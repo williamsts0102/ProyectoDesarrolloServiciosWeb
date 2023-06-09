@@ -10,103 +10,64 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles = SD.Role_Admin)]
-    public class ProductoController : Controller
+    public class CompanyController : Controller
     {
         /*esta variable solo se puede asignar en el constructor de la clase*/
         /*camabiaremos*/
         private readonly IUnitOfWork _unit;
 
-        /*para obtener rutas de archivos; ya que proporciona propiedades como WebRootPath y ContentRootPath*/
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public ProductoController(IUnitOfWork unit, IWebHostEnvironment webHostEnvironment)
+        public CompanyController(IUnitOfWork unit)
         {
             _unit = unit;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
             /*categoria es de la entidad*/
-            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties:"Categoria").ToList();
+            List<Company> listaCompany = _unit.Company.GetAll().ToList();
             
-            return View(listaProducto);
+            return View(listaCompany);
         }
 
-        public IActionResult Upsert(int? idProducto)
+        public IActionResult Upsert(int? id)
         {
-            ProductVM productvm = new()
-            {
-                listacat = _unit.Categoria.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.nombre,
-                    Value = u.idCategoria.ToString()
-                }),
-                producto = new Producto()
-            };
-
             /*aqui haremos un metodo actualizar: pero debemos enviarle un parametro*/
             /*si id es 0 o nulo*/
             /*agregara*/
-            if(idProducto==null || idProducto == 0)
+            if(id==null || id == 0)
             {
-                return View(productvm);
+                return View(new Company());
             }
             else
             {
                 /*actualizar*/
-                productvm.producto = _unit.Producto.Get(u=>u.idProducto==idProducto);
-                return View(productvm);
+                Company objCompany = _unit.Company.Get(u=>u.Id==id);
+                return View(objCompany);
             }
 
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM productvm, IFormFile? file)
+        public IActionResult Upsert(Company companyObj)
         {
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _webHostEnvironment.WebRootPath;
-
-                if (file != null)
+                if (companyObj.Id == 0)
                 {
-                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                    string productoPath = Path.Combine(wwwRootPath, @"imagenes\productos");
-
-                    if (!string.IsNullOrEmpty(productvm.producto.ImageUrl))
-                    {
-                        var oldImagenPath = Path.Combine(wwwRootPath, productvm.producto.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(oldImagenPath)) { System.IO.File.Delete(oldImagenPath); }
-                    }
-
-                    using (var fileStream = new FileStream(Path.Combine(productoPath, fileName), FileMode.Create))
-                    {
-                        file.CopyTo(fileStream);
-                    }
-                    productvm.producto.ImageUrl = @"\imagenes\productos\" + fileName;
-                }
-
-                if (productvm.producto.idProducto == 0)
-                {
-                    _unit.Producto.Add(productvm.producto);
+                    _unit.Company.Add(companyObj);
                 }
                 else
                 {
-                    _unit.Producto.Update(productvm.producto);
+                    _unit.Company.Update(companyObj);
                 }
 
                 _unit.Save();
-                TempData["succes"] = "Producto registrado";
+                TempData["succes"] = "Company registrado";
                 return RedirectToAction("Index");
             }
             else
             {
-                productvm.listacat = _unit.Categoria.GetAll().Select(u => new SelectListItem
-                {
-                    Text = u.nombre,
-                    Value = u.idCategoria.ToString()
-                });
-                return View(productvm);
+                return View(companyObj);
             }
         }
 
@@ -115,23 +76,19 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties: "Categoria").ToList();
-            return Json(new { data = listaProducto });
+            List<Company> listaCompany = _unit.Company.GetAll().ToList();
+            return Json(new { data = listaCompany });
         }
 
-        [HttpDelete] public IActionResult Delete(int idProducto)
+        [HttpDelete] public IActionResult Delete(int id)
         {
-            var productoToBeDeleted = _unit.Producto.Get(u => u.idProducto == idProducto);
-            if (productoToBeDeleted == null)
+            var CompanyToBeDeleted = _unit.Company.Get(u => u.Id == id);
+            if (CompanyToBeDeleted == null)
             {
                 return Json(new {success = false , messsage = "Error al intentar eliminar."});
             }
-            var oldImagenPath = Path.Combine(_webHostEnvironment.WebRootPath, 
-                productoToBeDeleted.ImageUrl.TrimStart('\\'));
-            if (System.IO.File.Exists(oldImagenPath)) 
-            { System.IO.File.Delete(oldImagenPath); }
-
-            _unit.Producto.Remove(productoToBeDeleted);
+          
+            _unit.Company.Remove(CompanyToBeDeleted);
             _unit.Save();
 
             return Json(new { succes = true, message = "Eliminación Exitosa" });

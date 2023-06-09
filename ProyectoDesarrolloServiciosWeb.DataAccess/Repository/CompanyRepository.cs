@@ -9,17 +9,18 @@ using System.Threading.Tasks;
 
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
 {
-    public class CategoriaRepository : Repository<Categoria>, ICategoriaRepository
+    public class CompanyRepository : Repository<Company>, ICompanyRepository
     {
         private ApplicationDbContext _db;
-        public CategoriaRepository(ApplicationDbContext db): base (db) {
+
+        public CompanyRepository(ApplicationDbContext db): base (db) {
             _db = db;
         }
 
 
-        public void Update(Categoria categoria)
+        public void Update(Company obj)
         {
-            _db.categorias.Update(categoria);
+            _db.company.Update(obj);
         }
     }
 }
