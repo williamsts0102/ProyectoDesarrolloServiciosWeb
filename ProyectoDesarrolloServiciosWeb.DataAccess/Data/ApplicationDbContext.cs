@@ -32,6 +32,45 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Company>().HasData(
+              new Company
+              {
+                  Id = 1,
+                  Nombre = "Tres Ositos",
+                  Ciudad = "Los Olivos",
+                  CodigoPostal = "52",
+                  Direccion = "Jron Los Bajos",
+                  Telefono = "965214215"
+              },
+              new Company
+              {
+                  Id = 2,
+                  Nombre = "Tres Ositos",
+                  Ciudad = "Los Olivos",
+                  CodigoPostal = "52",
+                  Direccion = "Jron Los Bajos",
+                  Telefono = "965214215"
+              },
+              new Company
+              {
+                  Id = 3,
+                  Nombre = "Tres Ositos",
+                  Ciudad = "Los Olivos",
+                  CodigoPostal = "52",
+                  Direccion = "Jron Los Bajos",
+                  Telefono = "965214215"
+              },
+              new Company
+              {
+                  Id = 4,
+                  Nombre = "Tres Ositos",
+                  Ciudad = "Los Olivos",
+                  CodigoPostal = "52",
+                  Direccion = "Jron Los Bajos",
+                  Telefono = "965214215"
+              }
+              );
+
 
             modelBuilder.Entity<Categoria>().HasData(
                 new Categoria { idCategoria = 1, nombre = "Hamburguesas", DisplayOrder = 1 },
@@ -39,6 +78,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
                 new Categoria { idCategoria = 3, nombre = "Papas", DisplayOrder = 3 }
                 );
 
+            
             modelBuilder.Entity<Producto>().HasData(
 
                 new Producto

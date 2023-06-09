@@ -8,7 +8,7 @@ using ProyectoDesarrolloServiciosWeb.Utility;
 namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles=SD.Role_Admin)]
+    //[Authorize(Roles=SD.Role_Admin)]
 
     public class CategoriaController : Controller
     {

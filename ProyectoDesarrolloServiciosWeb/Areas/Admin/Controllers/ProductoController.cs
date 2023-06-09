@@ -1,4 +1,4 @@
-﻿ using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
@@ -9,65 +9,104 @@ using ProyectoDesarrolloServiciosWeb.Utility;
 namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)]
-    public class CompanyController : Controller
+    //[Authorize(Roles = SD.Role_Admin)]
+    public class ProductoController : Controller
     {
         /*esta variable solo se puede asignar en el constructor de la clase*/
         /*camabiaremos*/
         private readonly IUnitOfWork _unit;
 
-        public CompanyController(IUnitOfWork unit)
+        /*para obtener rutas de archivos; ya que proporciona propiedades como WebRootPath y ContentRootPath*/
+        private readonly IWebHostEnvironment _webHostEnvironment;
+
+        public ProductoController(IUnitOfWork unit, IWebHostEnvironment webHostEnvironment)
         {
             _unit = unit;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
         {
             /*categoria es de la entidad*/
-            List<Company> listaCompany = _unit.Company.GetAll().ToList();
-            
-            return View(listaCompany);
+            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties: "Categoria").ToList();
+
+            return View(listaProducto);
         }
 
-        public IActionResult Upsert(int? id)
+        public IActionResult Upsert(int? idProducto)
         {
+            ProductVM productvm = new()
+            {
+                listacat = _unit.Categoria.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.nombre,
+                    Value = u.idCategoria.ToString()
+                }),
+                producto = new Producto()
+            };
+
             /*aqui haremos un metodo actualizar: pero debemos enviarle un parametro*/
             /*si id es 0 o nulo*/
             /*agregara*/
-            if(id==null || id == 0)
+            if (idProducto == null || idProducto == 0)
             {
-                return View(new Company());
+                return View(productvm);
             }
             else
             {
                 /*actualizar*/
-                Company objCompany = _unit.Company.Get(u=>u.Id==id);
-                return View(objCompany);
+                productvm.producto = _unit.Producto.Get(u => u.idProducto == idProducto);
+                return View(productvm);
             }
 
         }
 
         [HttpPost]
-        public IActionResult Upsert(Company companyObj)
+        public IActionResult Upsert(ProductVM productvm, IFormFile? file)
         {
             if (ModelState.IsValid)
             {
-                if (companyObj.Id == 0)
+                string wwwRootPath = _webHostEnvironment.WebRootPath;
+
+                if (file != null)
                 {
-                    _unit.Company.Add(companyObj);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    string productoPath = Path.Combine(wwwRootPath, @"imagenes\productos");
+
+                    if (!string.IsNullOrEmpty(productvm.producto.ImageUrl))
+                    {
+                        var oldImagenPath = Path.Combine(wwwRootPath, productvm.producto.ImageUrl.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImagenPath)) { System.IO.File.Delete(oldImagenPath); }
+                    }
+
+                    using (var fileStream = new FileStream(Path.Combine(productoPath, fileName), FileMode.Create))
+                    {
+                        file.CopyTo(fileStream);
+                    }
+                    productvm.producto.ImageUrl = @"\imagenes\productos\" + fileName;
+                }
+
+                if (productvm.producto.idProducto == 0)
+                {
+                    _unit.Producto.Add(productvm.producto);
                 }
                 else
                 {
-                    _unit.Company.Update(companyObj);
+                    _unit.Producto.Update(productvm.producto);
                 }
 
                 _unit.Save();
-                TempData["succes"] = "Company registrado";
+                TempData["succes"] = "Producto registrado";
                 return RedirectToAction("Index");
             }
             else
             {
-                return View(companyObj);
+                productvm.listacat = _unit.Categoria.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.nombre,
+                    Value = u.idCategoria.ToString()
+                });
+                return View(productvm);
             }
         }
 
@@ -76,19 +115,24 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<Company> listaCompany = _unit.Company.GetAll().ToList();
-            return Json(new { data = listaCompany });
+            List<Producto> listaProducto = _unit.Producto.GetAll(includeProperties: "Categoria").ToList();
+            return Json(new { data = listaProducto });
         }
 
-        [HttpDelete] public IActionResult Delete(int id)
+        [HttpDelete]
+        public IActionResult Delete(int idProducto)
         {
-            var CompanyToBeDeleted = _unit.Company.Get(u => u.Id == id);
-            if (CompanyToBeDeleted == null)
+            var productoToBeDeleted = _unit.Producto.Get(u => u.idProducto == idProducto);
+            if (productoToBeDeleted == null)
             {
-                return Json(new {success = false , messsage = "Error al intentar eliminar."});
+                return Json(new { success = false, messsage = "Error al intentar eliminar." });
             }
-          
-            _unit.Company.Remove(CompanyToBeDeleted);
+            var oldImagenPath = Path.Combine(_webHostEnvironment.WebRootPath,
+                productoToBeDeleted.ImageUrl.TrimStart('\\'));
+            if (System.IO.File.Exists(oldImagenPath))
+            { System.IO.File.Delete(oldImagenPath); }
+
+            _unit.Producto.Remove(productoToBeDeleted);
             _unit.Save();
 
             return Json(new { succes = true, message = "Eliminación Exitosa" });
