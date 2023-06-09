@@ -121,6 +121,8 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+   
 }
 
 h1, .h1 {
@@ -135,6 +137,7 @@ h1, .h1 {
 
 h2, .h2 {
     font-size: calc(1.375rem + 1.5vw);
+    font-family:'Berlin Sans FB';
 }
 
 @media (min-width: 1200px) {
@@ -145,6 +148,7 @@ h2, .h2 {
 
 h3, .h3 {
     font-size: calc(1.325rem + 0.9vw);
+    font-family: 'Berlin Sans FB';
 }
 
 @media (min-width: 1200px) {
@@ -670,11 +674,13 @@ progress {
     padding-left: calc(var(--bs-gutter-x) * 0.5);
     margin-right: auto;
     margin-left: auto;
+    
 }
 
 @media (min-width: 576px) {
     .container-sm, .container {
         max-width: 540px;
+        
     }
 }
 
@@ -3260,10 +3266,10 @@ textarea.form-control-lg {
 
 .btn-primary {
     --bs-btn-color: #fff;
-    --bs-btn-bg: #375a7f;
+    --bs-btn-bg: #ff7d01;
     --bs-btn-border-color: #375a7f;
     --bs-btn-hover-color: #fff;
-    --bs-btn-hover-bg: #2f4d6c;
+    --bs-btn-hover-bg: #000;
     --bs-btn-hover-border-color: #2c4866;
     --bs-btn-focus-shadow-rgb: 85, 115, 146;
     --bs-btn-active-color: #fff;
@@ -3273,7 +3279,9 @@ textarea.form-control-lg {
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: #375a7f;
     --bs-btn-disabled-border-color: #375a7f;
+    margin-bottom:15px;
 }
+
 
 .btn-secondary {
     --bs-btn-color: #fff;
@@ -4093,7 +4101,8 @@ textarea.form-control-lg {
 .nav-link {
     display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-    font-size: var(--bs-nav-link-font-size);
+    font-size: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: var(--bs-nav-link-font-weight);
     color: var(--bs-nav-link-color);
     text-decoration: none;
@@ -4278,6 +4287,10 @@ textarea.form-control-lg {
     padding-left: 0;
     margin-bottom: 0;
     list-style: none;
+    font-family:Bahnschrift;
+    font-size:17px;
+    
+    
 }
 
     .navbar-nav .show > .nav-link,
@@ -4756,6 +4769,7 @@ textarea.form-control-lg {
         .card > .card-header + .list-group,
         .card > .list-group + .card-footer {
             border-top: 0;
+            
         }
 
 .card-body {
@@ -5373,7 +5387,12 @@ textarea.form-control-lg {
         transition: none;
     }
 }
-
+th{
+    color:black;
+}
+td {
+    color: black;
+}
 .progress-bar-striped {
     background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
     background-size: var(--bs-progress-height) var(--bs-progress-height);
@@ -6040,6 +6059,14 @@ textarea.form-control-lg {
         padding: calc(var(--bs-modal-header-padding-y) * 0.5) calc(var(--bs-modal-header-padding-x) * 0.5);
         margin: calc(-0.5 * var(--bs-modal-header-padding-y)) calc(-0.5 * var(--bs-modal-header-padding-x)) calc(-0.5 * var(--bs-modal-header-padding-y)) auto;
     }
+a{
+    color:#949292;
+    --bs-btn-hover-bg:#375a7f;
+}
+a:hover {
+    color: #f39c12;
+   
+}
 
 .modal-title {
     margin-bottom: 0;
@@ -6350,7 +6377,9 @@ textarea.form-control-lg {
     background-color: var(--bs-tooltip-bg);
     border-radius: var(--bs-tooltip-border-radius);
 }
-
+body {
+    background-image: url("../../../../imagenes/productos/fondesss.jpg");
+}
 .popover {
     --bs-popover-zindex: 1070;
     --bs-popover-max-width: 276px;
@@ -8516,6 +8545,7 @@ textarea.form-control-lg {
 
 .mb-4 {
     margin-bottom: 1.5rem !important;
+    
 }
 
 .mb-5 {
@@ -8572,6 +8602,7 @@ textarea.form-control-lg {
 
 .p-4 {
     padding: 1.5rem !important;
+    background-color:#fff;
 }
 
 .p-5 {
@@ -8700,7 +8731,14 @@ textarea.form-control-lg {
 
 .pb-3 {
     padding-bottom: 1rem !important;
+    
 }
+/*.pb-3R {
+    padding-bottom: 1rem !important;
+    margin-top: 4%;
+    margin-right: 20%;
+    margin-left: 20%;
+}*/
 
 .pb-4 {
     padding-bottom: 1.5rem !important;
@@ -8892,7 +8930,10 @@ textarea.form-control-lg {
 
 .text-secondary {
     --bs-text-opacity: 1;
+    font-family: font-family:'Berlin Sans FB';
     color: rgba(var(--bs-secondary-rgb), var(--bs-text-opacity)) !important;
+    margin-left: 0%;
+    margin-top: 0%;
 }
 
 .text-success {
@@ -8978,7 +9019,9 @@ textarea.form-control-lg {
 
 .bg-primary {
     --bs-bg-opacity: 1;
-    background-color: #ff7d00 !important;
+    background-color: #ff7d01 !important;
+    padding-top: 0.1px;
+    padding-bottom: 0.1px;
 }
 
 .bg-secondary {

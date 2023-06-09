@@ -594,13 +594,13 @@ bg-success {
 .h2-promo {
     color: black;
     font-size: 40px;
-    font-family: "ChickenSans-Bold",sans-serif;
+    font-family: 'Comic Sans MS';
     font-weight: 800;
 }
 .titulo-menu h2 {
     color: black;
     font-size: 40px;
-    font-family: "ChickenSans-Bold",sans-serif;
+    font-family: 'Comic Sans MS';
     font-weight: 800;
 }
 
@@ -613,6 +613,9 @@ bg-success {
 
 .logoser{
     width:80px;
+}
+.logohome {
+    width: 20px;
 }
 
 .txtnosotros {
