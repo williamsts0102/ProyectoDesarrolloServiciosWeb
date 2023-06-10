@@ -6381,7 +6381,7 @@ a:hover {
     border-radius: var(--bs-tooltip-border-radius);
 }
 body {
-    background-image: url("../../../../imagenes/productos/fondesss.jpg");
+    background-image: url("../../../../imagenes/productos/fondito.jpg");
 }
 .popover {
     --bs-popover-zindex: 1070;
