@@ -9,18 +9,18 @@ function loadDataTable() {
         $('#tblData').DataTable({
             "ajax": { url: '/admin/company/getall' },
             "columns": [
-                { data: 'Nombre', "width": "15%" },
-                { data: 'Telefono', "width": "15%" },
-                { data: 'Direccion', "width": "15%" },
-                { data: 'Ciudad', "width": "15%" },
-                { data: 'CodigoPostal', "width": "15%" },
+                { data: 'nombre', "width": "15%" },
+                { data: 'direccion', "width": "15%" },
+                { data: 'ciudad', "width": "15%" },
+                { data: 'codigoPostal', "width": "15%" },
+                { data: 'telefono', "width": "15%" },
                 {
-                    data: 'idProducto',
+                    data: 'id',
                     "render": function (data) {
                         return `<div class="w-75 btn-group" role="group">
                                     <a href="/admin/company/upsert?id=${data}" class="btn btn-primary mx-2">
                                     <i class="bi bi-pencil-square"></i>Actualizar</a>
-                                    <a onclick="Delete('/admin/company/delete?id=${data}')" class="btn btn-danger mx-2">
+                                    <a onclick="Delete('/admin/company/delete?id=${data}')" class="btn btn-primary mx-2">
                                      <i class="bi bi-trash-fill"></i>Eliminar</a>
                                 </div>`
                     },

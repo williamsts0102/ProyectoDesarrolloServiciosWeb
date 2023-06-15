@@ -28,7 +28,6 @@ function loadDataTable() {
             ]
         });
 }
-
 function Delete(url) {
     Swal.fire({
         title: '¿Estas seguro?',

@@ -10,11 +10,11 @@ namespace ProyectoDesarrolloServiciosWeb.Models
     public class Company
     {
         public int Id { get; set; }
-        [Required]
-        public string Nombre { get; set; }
-        public string? Direccion{ get; set; }
+        public string? Nombre { get; set; }
+        public string? Direccion { get; set; }
         public string? Ciudad { get; set; }
         public string? CodigoPostal{ get; set; }
         public string? Telefono { get; set; }
+
     }
 }

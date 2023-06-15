@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
 using ProyectoDesarrolloServiciosWeb.Utility;
 
@@ -35,6 +36,8 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        private readonly IUnitOfWork _unitOfWork;
+
         /*necesitamos una clase auxiliar, administrador de funciones*/
         private readonly RoleManager<IdentityRole> _roleManager;
 
@@ -47,10 +50,16 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
 
             /*agregando el rol*/
             RoleManager<IdentityRole> roleManager,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+
+            IUnitOfWork unitOfWork
+            )
 
         {
+            _unitOfWork=unitOfWork;
             /*agregamos el rol*/
+
+
             _roleManager = roleManager;
 
             _userManager = userManager;
@@ -126,6 +135,11 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
             public string? CodigoPostal { get; set; }
             public string? Telefono { get; set; }
 
+            public int? CompanyId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
+
+
         }
 
 
@@ -145,6 +159,11 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i,
+                }),
+                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Nombre,
+                    Value = i.Id.ToString( ),
                 })
             };
 
@@ -168,6 +187,11 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
                 user.Ciudad = Input.Ciudad;
                 user.CodigoPostal=Input.CodigoPostal;
                 user.Telefono = Input.Telefono;
+
+                if (Input.Role == SD.Role_Comp)
+                {
+                    user.CompanyId = Input.CompanyId;
+                }
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 

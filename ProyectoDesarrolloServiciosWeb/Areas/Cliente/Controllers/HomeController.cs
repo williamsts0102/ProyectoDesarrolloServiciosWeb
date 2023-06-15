@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
 {
@@ -25,8 +27,41 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
 
         public IActionResult Details(int productoId)
         {
-            Producto producto = _unit.Producto.Get(u=>u.idProducto== productoId, includeProperties: "Categoria");
-            return View(producto);
+            CarritoCompras carrito = new()
+            {
+                 Producto = _unit.Producto.Get(u=>u.idProducto== productoId, includeProperties: "Categoria"),
+                Cantidad = 1,
+                ProductoId=productoId
+            };
+            return View(carrito);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(CarritoCompras carritoCompras)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            carritoCompras.ApplicationUserId = userId;
+
+            CarritoCompras carritoDb = _unit.Carrito.Get(u=>u.ApplicationUserId==userId &&
+            u.ProductoId==carritoCompras.ProductoId);
+
+            if (carritoDb != null)
+            {
+
+                carritoDb.Cantidad += carritoCompras.Cantidad;
+                _unit.Carrito.Update(carritoDb);
+            }
+            else
+            {
+                _unit.Carrito.Add(carritoCompras);
+            }
+
+            TempData["succes"] = "Carrito actualizado";
+            _unit.Save();
+
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()

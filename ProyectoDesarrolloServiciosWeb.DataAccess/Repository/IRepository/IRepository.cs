@@ -15,7 +15,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
         IEnumerable<T> GetAll(string? includeProperties = null);
         /*recuperar solo una categoria*/
         /*resultara un valor booleano*/
-        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null);
+        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool rastrear =false);
 
         /*eleminar categoria*/
         void Add(T entity);

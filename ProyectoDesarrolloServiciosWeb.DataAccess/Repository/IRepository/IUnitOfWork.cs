@@ -11,6 +11,9 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
         ICategoriaRepository Categoria { get; }
         IProductoRepository Producto { get; }
         ICompanyRepository Company { get; }
+        
+        ICarritoRepository Carrito { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
 
     }

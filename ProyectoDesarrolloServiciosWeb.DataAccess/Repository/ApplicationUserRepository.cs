@@ -9,17 +9,13 @@ using System.Threading.Tasks;
 
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
 {
-    public class CarritoComprasRepository : Repository<CarritoCompras>, ICarritoRepository
+    public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository
     {
         private ApplicationDbContext _db;
-        public CarritoComprasRepository(ApplicationDbContext db): base (db) {
+        public ApplicationUserRepository(ApplicationDbContext db) : base(db)
+        {
             _db = db;
         }
 
-
-        public void Update(CarritoCompras objCarrito)
-        {
-            _db.carrito.Update(objCarrito);
-        }
     }
 }

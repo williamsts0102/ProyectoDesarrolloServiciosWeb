@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
 {
@@ -31,9 +32,19 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool rastrear =false)
         {
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query;
+            if (rastrear)
+            {
+                 query= dbSet;
+
+            }
+            else
+            {
+                query = dbSet.AsNoTracking();
+            }
+
             query = query.Where(filter);
 
             if (!string.IsNullOrEmpty(includeProperties))
@@ -44,6 +55,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
                     query = query.Include(includeProp);
                 }
             }
+
             return query.FirstOrDefault();
         }
 
