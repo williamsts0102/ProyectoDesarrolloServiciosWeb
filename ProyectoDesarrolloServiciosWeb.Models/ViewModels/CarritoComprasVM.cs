@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProyectoDesarrolloServiciosWeb.Models.ViewModels
 {
-    internal class CarritoComprasVM
+    public class CarritoComprasVM
     {
+        public IEnumerable<CarritoCompras> carritoList { get; set; }
+        public OrderHeader OrderHeader { get; set; }
     }
 }

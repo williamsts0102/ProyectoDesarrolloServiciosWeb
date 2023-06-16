@@ -1,0 +1,114 @@
+﻿@model CarritoComprasVM
+
+<form method="post">
+	<br />
+	<div class="container"s>
+		<div class="card shadow border-0">
+
+			<div class="card-header bg-secondary bg-gradient text-light ml-0 py-4">
+				<div class="row px-4">
+					<div class="col-6">
+						<h5 class="pt-2 text-white">
+							Resumen de Orden
+						</h5>
+					</div>
+					<div class="col-6 text-end">
+						<a asp-action="Index" class="btn btn-outline-danger btn-sm">Regresar al Carrito</a>
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="container rounded p-2">
+					<div class="row">
+						<div class="col-12 col-lg-6 pb-4">
+							<div class="row">
+								<h4 class="d-flex justify-content-between align-items-center mb-3">
+									<span class="text-info">Detalles de Envío:</span>
+								</h4>
+							</div>
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Nombre</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.Nombre" class="form-control"/>
+									<span asp-validation-for="OrderHeader.Nombre" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Teléfono</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.Telefono" class="form-control" />
+									<span asp-validation-for="OrderHeader.Telefono" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Dirección</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.Direccion" class="form-control" />
+									<span asp-validation-for="OrderHeader.Direccion" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Ciudad</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.Ciudad" class="form-control" />
+									<span asp-validation-for="OrderHeader.Ciudad" class="text-danger"></span>
+								</div>
+							</div>
+							<div class="row my-1">
+								<div class="col-3">
+									<label>Código Postal</label>
+								</div>
+								<div class="col-9">
+									<input asp-for="OrderHeader.CodigoPostal" class="form-control" />
+									<span asp-validation-for="OrderHeader.CodigoPostal" class="text-danger"></span>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-lg-5 offset-lg-1">
+							<h4 class="d-flex justify-content-between align-items-center mb-3">
+								<span class="text-info">Resumen del Pedido:</span>
+							</h4>
+							<ul class="list-group mb-3">
+								@foreach(var detalles in Model.carritoList){
+								<li class="list-group-item d-flex justify-content-between">
+									<div>
+											<h6 class="my-0"> @detalles.Producto.nombreProducto</h6>
+											<small class="text-muted">Cantidad: @detalles.Cantidad </small>
+									</div>
+									<span class="text-muted">@(detalles.Precio*detalles.Cantidad)</span>
+								</li>
+								}
+
+								<li class="list-group-item d-flex justify-content-between bg-light">
+									<small class="text-info">Total (USD)</small>
+									<strong class="text-info">@Model.OrderHeader.TotalPedido</strong>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer">
+				<div class="row">
+					<div class="col-12 col-md-8 pt-2">
+						<p style="color:maroon; font-size:14px;">
+							Fecha Estimada de Llegada:
+							@DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
+						</p>
+					</div>
+					<div class="col-12 col-md-4">
+						<button type="submit" class="btn btn-primary form-control">Place Order</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

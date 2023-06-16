@@ -32,7 +32,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
             dbSet.Add(entity);
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool rastrear =false)
+        public T Get(Expression<Func<T, bool>>? filter, string? includeProperties = null, bool rastrear =false)
         {
             IQueryable<T> query;
             if (rastrear)
@@ -59,9 +59,13 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string ? includeProperties=null)
+        public IEnumerable<T> GetAll(Expression<Func<T,bool>> filter, string ? includeProperties=null)
         {
             IQueryable<T> query = dbSet;
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
 
             if (!string.IsNullOrEmpty(includeProperties))
             {

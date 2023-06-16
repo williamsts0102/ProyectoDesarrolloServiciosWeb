@@ -20,6 +20,10 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+
+        public IOrderDetallesRepository OrderDetalles { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db) 
         {
             _db = db;
@@ -28,6 +32,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
             Company = new CompanyRepository(_db);
             Carrito = new CarritoComprasRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetalles=new OrderDetallesRepository(_db);
         }
 
         public void Save()

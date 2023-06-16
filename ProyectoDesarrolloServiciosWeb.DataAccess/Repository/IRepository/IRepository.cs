@@ -12,10 +12,10 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
     {
         /*T Categorias*/
         /*recuperar todas las categorias*/
-        IEnumerable<T> GetAll(string? includeProperties = null);
+        IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter=null, string? includeProperties = null);
         /*recuperar solo una categoria*/
         /*resultara un valor booleano*/
-        T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool rastrear =false);
+        T Get(Expression<Func<T, bool>>? filter, string? includeProperties = null, bool rastrear =false);
 
         /*eleminar categoria*/
         void Add(T entity);

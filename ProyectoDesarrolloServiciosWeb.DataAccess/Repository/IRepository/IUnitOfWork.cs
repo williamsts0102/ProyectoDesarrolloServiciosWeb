@@ -14,6 +14,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
         
         ICarritoRepository Carrito { get; }
         IApplicationUserRepository ApplicationUser { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+        IOrderDetallesRepository OrderDetalles { get; }
         void Save();
 
     }

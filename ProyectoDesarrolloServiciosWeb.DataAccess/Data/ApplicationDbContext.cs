@@ -28,6 +28,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Data
         /*crear la tabla carrito de compras*/
         public DbSet<CarritoCompras> carrito { get; set; }
 
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+        public DbSet<OrderDetalle> OrderDetalles { get; set; }
         /*para definir a los usuarios*/
         public DbSet<ApplicationUser> applicationUser { get; set; }
         /*agregar datos iniciales, estamos sobreescribiendo en la base de datos DBContext, de esta manera
