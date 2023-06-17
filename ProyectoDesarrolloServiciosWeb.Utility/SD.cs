@@ -14,5 +14,17 @@ namespace ProyectoDesarrolloServiciosWeb.Utility
         public const string Role_Admin = "Admin";
         public const string Role_Empleado = "Empleado";
 
-    }
+		public const string EstadoPendiente = "Pendiente";
+		public const string EstadoAprobado = "Aprobado";
+		public const string EstadoProceso = "Proceso";
+		public const string EstadoEnviado = "Enviado";
+		public const string EstadoCancelado = "Cancelado";
+		public const string EstadoRembolso = "Rembolso";
+
+		public const string EstadoPagoPendiente = "Pendiente";
+		public const string EstadoPagoAprobado = "Aprobado";
+		public const string PagoEstadoRetrasado = "PagoRetrasado";
+		public const string PagoEstacoRechazado = "Rechazado";
+
+	}
 }
