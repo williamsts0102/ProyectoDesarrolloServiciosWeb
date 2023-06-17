@@ -3,6 +3,7 @@
 	.caja{
 		background-color:white;
 	}
+	
 </style>
 <form method="post">
 	<br />
@@ -27,7 +28,7 @@
 						<div class="col-12 col-lg-6 pb-4">
 							<div class="row">
 								<h4 class="d-flex justify-content-between align-items-center mb-3">
-									<span class="text-info">Detalles de Envío:</span>
+									<span class="text-dark">Detalles de Envío:</span>
 								</h4>
 							</div>
 							<div class="row my-1">
@@ -78,7 +79,7 @@
 						</div>
 						<div class="col-12 col-lg-5 offset-lg-1">
 							<h4 class="d-flex justify-content-between align-items-center mb-3">
-								<span class="text-info">Resumen del Pedido:</span>
+								<span class="text-dark">Resumen del Pedido:</span>
 							</h4>
 							<ul class="list-group mb-3">
 								@foreach(var detalles in Model.carritoList){
@@ -92,8 +93,8 @@
 								}
 
 								<li class="list-group-item d-flex justify-content-between bg-light">
-									<small class="text-info">Total (USD)</small>
-									<strong class="text-info">@Model.OrderHeader.TotalPedido</strong>
+									<small class="text-dark">Total (USD)</small>
+									<strong class="text-dark">@Model.OrderHeader.TotalPedido</strong>
 								</li>
 							</ul>
 						</div>
