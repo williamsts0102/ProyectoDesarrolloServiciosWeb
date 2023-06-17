@@ -1,5 +1,19 @@
 ﻿    @model IEnumerable<Producto>
-
+<style>
+    h2{
+        text-align:center;   
+    }
+    .titulo-promo
+    .titulo-menu{
+        margin-top:10px;
+        margin-bottom:10px;
+    }
+    .caja{
+        background-color:white;
+    }
+    
+    
+</style>
 <div class="">
 
     <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel" style="
@@ -53,22 +67,22 @@
             <div class="col-lg-3 col-sm-6" >
                 <div class="row p-2">
                     <div class="col-12 p-1">
-                        <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                        <div class="card border-0 p-3 shadow border-top border-5 rounded caja">
                             <img src="@producto.ImageUrl" class="card-img-top rounded">
                             <div class="card-body pb-0">
                                 <div class="pl-1">
-                                    <p class="card-title h5 text-white opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
+                                    <p class="card-title h5 text-black opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
                                     <p class="card-title text-warning text-center">Categoría: @producto.Categoria.nombre</p>
                                 </div>
                                 <div class="pl-1">
-                                    <p class="card-title text-white opacity-75 text-center mb-0">
+                                    <p class="card-title text-black opacity-75 text-center mb-0">
                                            Precio: @producto.precio.ToString("c")
                                     </p>
                                 </div>
                             </div>
                             <a asp-action="Details"
                                asp-route-productoId="@producto.idProducto"
-                               class="btn btn-primary bg-gradient border-0 form-control">
+                               class="btn btn-primary bg-gradient border-0 form-control mt-3">
                                 Detalle
                             </a>
                         </div>
@@ -107,7 +121,7 @@
                     <p>
                         La gran compañia cyber chicken nos caracterizamos por ser un grupo muy unido y
                         ademas nos especializamos en la calidad del producto final ya que contamos con
-                        expertos altamente caliicados que se encargan en la elaboracion y entrega del
+                        expertos altamente calificados que se encargan en la elaboracion y entrega del
                         producto final.
                         @*<img src="https://nteve.com/wp-content/uploads/2021/06/17-12-777x445.png" />*@
                     </p>
@@ -116,29 +130,29 @@
                     <h5 class="text-uppercase mb-4 font-weight-bold">Informacion</h5>
                     <hr class="mb-4" />
                     <p>
-                        <a href="#" class="text-dark">Locales y Reservas</a>
+                        <a href="https://www.popeyes.com.pe/locales" class="text-dark">Locales y Reservas</a>
                     </p>
                     <p>
-                        <a href="#" class="text-dark">Zonas de reparto</a>
+                        <a href="https://www.popeyes.com.pe/zonas-de-reparto" class="text-dark">Zonas de reparto</a>
                     </p>
                     <p>
-                        <a href="#" class="text-dark">Legales Promocionales</a>
+                        <a href="https://www.popeyes.com.pe/legales-promocionales" class="text-dark">Legales Promocionales</a>
                     </p>
                     <p>
-                        <a href="#" class="text-dark">Ayuda</a>
+                        <a href="https://www.popeyes.com.pe/contacto" class="text-dark">Ayuda</a>
                     </p>
                 </div>
                 <div class="col-lg-2 mx-auto mt-3 ">
                     <h5 class="text-uppercase mb-4 font-weight-bold">MI Cuenta</h5>
                     <hr class="mb-4" />
                     <p>
-                        <a href="#" class="text-dark">Mis ordenes</a>
+                        <a href="https://www.popeyes.com.pe/sales/order/history" class="text-dark">Mis ordenes</a>
                     </p>
                     <p>
-                        <a href="#" class="text-dark">Mis Direcciones</a>
+                        <a href="https://www.popeyes.com.pe/customer/address" class="text-dark">Mis Direcciones</a>
                     </p>
                     <p>
-                        <a href="#" class="text-dark">Mi informacion</a>
+                        <a href="https://www.popeyes.com.pe/customer/account" class="text-dark">Mi informacion</a>
                     </p>
                     
                 </div>
@@ -159,10 +173,8 @@
                 <hr class="mb-4" />
                 <div class="text-center mb-2">
                     <p>
-                        Copyright Todos los derechos reservados
-                        <a href="#">
-                            <strong class="text-primary">Test</strong>
-                        </a>
+                        © 2023 Todos los derechos reservados
+                        
                     </p>
                 </div>
                 <div class="text-center">

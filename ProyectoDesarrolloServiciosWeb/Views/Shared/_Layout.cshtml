@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"/>   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<style>
+    .dropdown-menu{
+        background-color:white;
+       
+        
+    }
+
+    .dropdown-item{
+        color:black;
+    }
+
+    .dropdown-item:hover {
+        color: white;
+        background-color:black;
+    }
+    
+</style>
 <body>
     <header>
         <nav id="nav" class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -54,9 +71,10 @@
                         @*}*@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Cliente" asp-controller="Carrito" asp-action="Index">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                               @* <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 0h1.1l.401 1.606L2.184 9h10.058l1.189-5.833L15.9 1.1H1zm2.46 2h11.08l-1.07 5H4.37L2.46 2zm.94 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm7 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
-                                </svg> &nbsp;
+                                </svg> &nbsp;*@
+                                <img src="~/imagenes/productos/carrito-de-compras.png" />
                             </a>
                         </li>
                     </ul>

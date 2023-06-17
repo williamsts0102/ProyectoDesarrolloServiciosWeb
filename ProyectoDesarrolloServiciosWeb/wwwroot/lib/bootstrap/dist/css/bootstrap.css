@@ -4192,7 +4192,8 @@ textarea.form-control-lg {
         .nav-pills .nav-link.active,
         .nav-pills .show > .nav-link {
             color: var(--bs-nav-pills-link-active-color);
-            background-color: var(--bs-nav-pills-link-active-bg);
+            background-color: #ff7d01;
+            border:1px solid black;
         }
 
 .nav-fill > .nav-link,

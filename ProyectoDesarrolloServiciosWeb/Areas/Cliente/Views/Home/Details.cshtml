@@ -1,5 +1,9 @@
 ﻿@model CarritoCompras
-
+<style>
+    .caja{
+        background-color:white;
+    }
+</style>
 <form method="post">
     <input hidden asp-for="ProductoId"/>
     <div class="card shadow border-0 mt-4 mb-4">
@@ -11,7 +15,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-body">
+        <div class="caja">
             <div class="py-3">
                 <div class="row">
                     <div class="col-6 col-md-2 offset-lg-1 pb-1">

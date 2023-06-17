@@ -1,4 +1,13 @@
 ﻿@model CarritoComprasVM
+<style>
+    .caja{
+        background-color:white;
+    }
+    .eliminar{
+        margin-bottom:3px;
+        margin-left:1px;
+    }
+</style>
 <form method="post">
     <br />
     <div class="card shadow border-0">
@@ -12,7 +21,7 @@
 
             </div>
         </div>
-        <div class="card-body my-4">
+        <div class="caja pt-4 ">
             <div class="row">
             </div>
             <div class="row mb-3 pb-3">
@@ -42,16 +51,19 @@
                                 <div class="w-75 btn-group" role="group">
                                         <a asp-action="aumentar" asp-route-carritoId="@item.Id" class="btn btn-outline-primary bg-gradient py-2">
                                         <i class="bi bi-plus-square"></i>
+                                            <img class="eliminar" widht="20px" height="20px" src="~/imagenes/productos/mas.png">
                                     </a> &nbsp;
                                         <a asp-action="disminuir" asp-route-carritoId="@item.Id" class="btn btn-outline-primary bg-gradient py-2">
                                         <i class="bi bi-dash-square"></i>
+                                            <img class="eliminar" widht="20px" height="20px" src="~/imagenes/productos/menos.png">
                                     </a> 
                                 </div>
                             </div>
 
                             <div class="col-3 col-sm-4 col-lg-2 offset-lg-1 text-right pt-2">
-                                    <a asp-action="eliminar" asp-route-carritoId="@item.Id"  class="btn btn-danger bg-gradient py-2">
+                                    <a asp-action="eliminar" asp-route-carritoId="@item.Id"  class="btn btn-danger bg-gradient ">
                                         <i class="bi bi-trash-fill"></i>
+                                        <img class="eliminar" widht="20px" height="20px" src="~/imagenes/productos/eliminar.png">
                                     </a>
                             </div>
                         </div>
