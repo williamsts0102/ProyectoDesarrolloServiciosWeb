@@ -153,7 +153,7 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
             }
 			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
 			{
-                var domain = "https://localhost:7001";
+                var domain = "https://localhost:44307";
                 var options = new SessionCreateOptions
                 {
                     SuccessUrl = domain + $"/Cliente/Carrito/ConfirmarOrden?id={carritoComprasVM.OrderHeader.Id}",

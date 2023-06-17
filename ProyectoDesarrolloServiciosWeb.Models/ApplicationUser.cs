@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoDesarrolloServiciosWeb.Models
 {
-    public class ApplicationUser:IdentityUser
+    public class ApplicationUser: IdentityUser
     {
         [Required]
         public string? Nombre { get; set; }
