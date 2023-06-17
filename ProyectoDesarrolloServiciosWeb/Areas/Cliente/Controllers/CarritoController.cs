@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository;
 using ProyectoDesarrolloServiciosWeb.Models;
 using ProyectoDesarrolloServiciosWeb.Models.ViewModels;
 using ProyectoDesarrolloServiciosWeb.Utility;
+using Stripe.Checkout;
 using System.Security.Claims;
+
 
 namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
 {
@@ -118,12 +121,14 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
 			carritoComprasVM.OrderHeader.FechaOrden = System.DateTime.Now;
 			carritoComprasVM.OrderHeader.ApplicationUserId = userId;
 
+            ApplicationUser applicationUser= _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+
 			foreach (var carrito in carritoComprasVM.carritoList)
 			{
 				carrito.Precio = carrito.Producto.precio;
 				carritoComprasVM.OrderHeader.TotalPedido += carrito.Precio * carrito.Cantidad;
 			}
-            if (carritoComprasVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0)
+            if (applicationUser.CompanyId.GetValueOrDefault() == 0)
             {
                 carritoComprasVM.OrderHeader.EstadoPago = SD.EstadoPagoPendiente;
 				carritoComprasVM.OrderHeader.EstadoPedido = SD.EstadoPendiente;
@@ -146,15 +151,66 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Cliente.Controllers
                 _unitOfWork.OrderDetalles.Add(orderDetalle);
                 _unitOfWork.Save();
             }
-			if (carritoComprasVM.OrderHeader.ApplicationUser.CompanyId.GetValueOrDefault() == 0)
+			if (applicationUser.CompanyId.GetValueOrDefault() == 0)
 			{
-			}
+                var domain = "https://localhost:7001";
+                var options = new SessionCreateOptions
+                {
+                    SuccessUrl = domain + $"/Cliente/Carrito/ConfirmarOrden?id={carritoComprasVM.OrderHeader.Id}",
+                    CancelUrl = domain + "/Cliente/Carrito",
+                    LineItems = new List<SessionLineItemOptions>(),
+                    Mode = "payment"
+                };
 
-			return View(carritoComprasVM);
+                foreach(var item in carritoComprasVM.carritoList)
+                {
+                    var sessionLineItem = new SessionLineItemOptions
+                    {
+                        PriceData = new SessionLineItemPriceDataOptions
+                        {
+                            UnitAmount = (long)(item.Precio * 100),
+                            Currency = "pen",
+                            ProductData = new SessionLineItemPriceDataProductDataOptions
+                            {
+                                Name = item.Producto.nombreProducto
+                            }
+                        },
+                        Quantity = item.Cantidad
+                    };
+                    options.LineItems.Add(sessionLineItem);
+                }
+                var service = new SessionService();
+                Session session = service.Create(options);
+                _unitOfWork.OrderHeader.UpdateStripePaymentID(carritoComprasVM.OrderHeader.Id, session.Id, session.PaymentIntentId);
+                _unitOfWork.Save();
+                Response.Headers.Add("Location", session.Url);
+                return new StatusCodeResult(303);
+
+            }
+
+			return RedirectToAction(nameof(ConfirmarOrden), new { id = carritoComprasVM.OrderHeader.Id } );
 		}
 
         public IActionResult ConfirmarOrden(int id)
         {
+            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties: "ApplicationUser");
+            if (orderHeader.EstadoPago != SD.PagoEstadoRetrasado)
+            {
+                var service = new SessionService();
+                Session session = service.Get(orderHeader.SessionId);
+
+                if (session.PaymentStatus.ToLower() == "paid")
+                {
+                    _unitOfWork.OrderHeader.UpdateStripePaymentID(id, session.Id, session.PaymentIntentId);
+                    _unitOfWork.OrderHeader.UpdateStatus(id, SD.EstadoAprobado, SD.EstadoPagoAprobado);
+                    _unitOfWork.Save();
+                }
+
+                List<CarritoCompras> carritoCompras = _unitOfWork.Carrito.GetAll(u => u.ApplicationUserId == orderHeader.ApplicationUserId).ToList();
+
+                _unitOfWork.Carrito.RemoveRange(carritoCompras);
+                _unitOfWork.Save();
+            }
             return View(id);
         }
 

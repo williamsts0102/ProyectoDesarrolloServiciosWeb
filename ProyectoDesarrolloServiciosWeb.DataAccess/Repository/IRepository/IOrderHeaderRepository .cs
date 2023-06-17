@@ -11,6 +11,8 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository.IRepository
     public interface IOrderHeaderRepository : IRepository<OrderHeader>
     {
         void Update(OrderHeader orderHeader);
+        void UpdateStatus(int id, string estadoPedido, string? estadoPago = null);
+        void UpdateStripePaymentID(int id, string sessionId, string idPago );
     }
 }
 

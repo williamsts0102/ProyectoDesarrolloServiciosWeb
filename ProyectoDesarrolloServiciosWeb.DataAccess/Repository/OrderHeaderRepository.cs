@@ -15,11 +15,39 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Repository
         public OrderHeaderRepository(ApplicationDbContext db): base (db) {
             _db = db;
         }
-
+        
 
         public void Update(OrderHeader objOrderHeader)
         {
             _db.OrderHeaders.Update(objOrderHeader);
         }
+
+        public void UpdateStatus(int id, string estadoPedido, string? estadoPago = null)
+        {
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (orderFromDb != null)
+            {
+                orderFromDb.EstadoPedido = estadoPedido;
+                if (!string.IsNullOrEmpty(estadoPago))
+                {
+                    orderFromDb.EstadoPago = estadoPago;
+                }
+            }
+        }
+        public void UpdateStripePaymentID(int id, string sessionId, string idPago)
+        {
+            var orderFromDb = _db.OrderHeaders.FirstOrDefault(u => u.Id == id);
+            if (!string.IsNullOrEmpty(sessionId))
+            {
+                orderFromDb.SessionId = sessionId;
+            }
+            if (!string.IsNullOrEmpty(idPago))
+            {
+                orderFromDb.IdPago = idPago;
+                orderFromDb.FechaPago = DateTime.Now;
+            }
+            
+        }
+        
     }
 }
