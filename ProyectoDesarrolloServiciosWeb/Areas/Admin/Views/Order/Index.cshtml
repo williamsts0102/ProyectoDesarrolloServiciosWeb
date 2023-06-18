@@ -34,12 +34,31 @@
     .encabezado {
         background-color: lightgray;
         border: 2px solid black;
+
     }
+
+    .list-group-item {
+        background-color: white;
+        color: black;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin-right: 10px;
+        transition: background-color 0.3s ease;
+    }
+
+        .list-group-item.active {
+            background-color: #ffa726;
+            color: white;
+        }
+
+
 </style>
 <div class="card shadow border-0 mt-4">
     <div class="d-flex justify-content-between pb-5 pt-2">
         <span></span>
-        <ul class="list-group list-group-horizontal-sm">
+        <ul class="list-group list-group-horizontal-sm encabezado">
             <a style="text-decoration:none;" asp-controller="Order" asp-action="Index" asp-route-status="enproceso">
             <li class="list-group-item @enproceso">En proceso</li>
             </a>
@@ -57,7 +76,7 @@
             </a>
         </ul>
     </div>
-        <table id="tblData" class="table table-bordered teibol " style="width:100%">
+        <table id="tabla" class="table table-bordered teibol " style="width:100%">
             <thead class="encabezado">
                 <tr>
                     <th>ID</th>
@@ -76,3 +95,17 @@
 @section Scripts{
     <script src="~/js/orders.js"></script>
 }
+
+<script>
+    var listItems = document.querySelectorAll('.list-group-item');
+
+    listItems.forEach(function (item) {
+        item.addEventListener('click', function () {
+            listItems.forEach(function (item) {
+                item.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+</script>
+

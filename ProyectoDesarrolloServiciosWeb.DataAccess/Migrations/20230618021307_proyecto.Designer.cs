@@ -12,8 +12,8 @@ using ProyectoDesarrolloServiciosWeb.DataAccess.Data;
 namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230616205539_addOrders")]
-    partial class addOrders
+    [Migration("20230618021307_proyecto")]
+    partial class proyecto
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,13 +289,49 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
                         {
                             idCategoria = 2,
                             DisplayOrder = 2,
-                            nombre = "Pizas"
+                            nombre = "Pizzas"
                         },
                         new
                         {
                             idCategoria = 3,
                             DisplayOrder = 3,
-                            nombre = "Papas"
+                            nombre = "Papas fritas"
+                        },
+                        new
+                        {
+                            idCategoria = 4,
+                            DisplayOrder = 4,
+                            nombre = "Sandwiches"
+                        },
+                        new
+                        {
+                            idCategoria = 5,
+                            DisplayOrder = 5,
+                            nombre = "Ensaladas"
+                        },
+                        new
+                        {
+                            idCategoria = 6,
+                            DisplayOrder = 6,
+                            nombre = "Pollo frito"
+                        },
+                        new
+                        {
+                            idCategoria = 7,
+                            DisplayOrder = 7,
+                            nombre = "Hot dogs"
+                        },
+                        new
+                        {
+                            idCategoria = 8,
+                            DisplayOrder = 8,
+                            nombre = "Tacos"
+                        },
+                        new
+                        {
+                            idCategoria = 9,
+                            DisplayOrder = 9,
+                            nombre = "Postres"
                         });
                 });
 
@@ -308,18 +344,23 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Ciudad")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CodigoPostal")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -330,38 +371,74 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Ciudad = "Los Olivos",
-                            CodigoPostal = "52",
-                            Direccion = "Jron Los Bajos",
-                            Nombre = "Tres Ositos",
-                            Telefono = "965214215"
+                            Ciudad = "Ciudad A",
+                            CodigoPostal = "12345",
+                            Direccion = "Calle Principal 1",
+                            Nombre = "ABC Corporation",
+                            Telefono = "123456789"
                         },
                         new
                         {
                             Id = 2,
-                            Ciudad = "Los Olivos",
-                            CodigoPostal = "52",
-                            Direccion = "Jron Los Bajos",
-                            Nombre = "Tres Ositos",
-                            Telefono = "965214215"
+                            Ciudad = "Ciudad B",
+                            CodigoPostal = "54321",
+                            Direccion = "Avenida Central 2",
+                            Nombre = "XYZ Industries",
+                            Telefono = "987654321"
                         },
                         new
                         {
                             Id = 3,
-                            Ciudad = "Los Olivos",
-                            CodigoPostal = "52",
-                            Direccion = "Jron Los Bajos",
-                            Nombre = "Tres Ositos",
-                            Telefono = "965214215"
+                            Ciudad = "Ciudad C",
+                            CodigoPostal = "67890",
+                            Direccion = "Plaza Mayor 3",
+                            Nombre = "PQR Solutions",
+                            Telefono = "456789123"
                         },
                         new
                         {
                             Id = 4,
-                            Ciudad = "Los Olivos",
-                            CodigoPostal = "52",
-                            Direccion = "Jron Los Bajos",
-                            Nombre = "Tres Ositos",
-                            Telefono = "965214215"
+                            Ciudad = "Ciudad D",
+                            CodigoPostal = "09876",
+                            Direccion = "Boulevard Secundario 4",
+                            Nombre = "DEF Enterprises",
+                            Telefono = "321654987"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Ciudad = "Ciudad E",
+                            CodigoPostal = "13579",
+                            Direccion = "Calle Secundaria 5",
+                            Nombre = "GHI Holdings",
+                            Telefono = "159753852"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Ciudad = "Ciudad F",
+                            CodigoPostal = "97531",
+                            Direccion = "Avenida Principal 6",
+                            Nombre = "JKL Group",
+                            Telefono = "258369147"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Ciudad = "Ciudad G",
+                            CodigoPostal = "75319",
+                            Direccion = "Plaza Central 7",
+                            Nombre = "MNO Incorporated",
+                            Telefono = "741852963"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Ciudad = "Ciudad H",
+                            CodigoPostal = "31975",
+                            Direccion = "Boulevard Principal 8",
+                            Nombre = "RST Ventures",
+                            Telefono = "852963741"
                         });
                 });
 
@@ -476,6 +553,7 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("descripcion")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("nombreProducto")
@@ -495,39 +573,102 @@ namespace ProyectoDesarrolloServiciosWeb.DataAccess.Migrations
                     b.HasData(
                         new
                         {
-                            idProducto = 1,
+                            idProducto = 101,
                             ImageUrl = "",
                             categoriaId = 1,
-                            descripcion = "Deliciosa combinación de carne jugosa, generalmente de res, cocinada a la parrilla o a la plancha",
-                            nombreProducto = "Hamburguesas",
-                            precio = 15.0
+                            descripcion = "Hamburguesa con queso, lechuga, tomate y salsa especial",
+                            nombreProducto = "Cheeseburger",
+                            precio = 8.9900000000000002
                         },
                         new
                         {
-                            idProducto = 2,
+                            idProducto = 102,
                             ImageUrl = "",
                             categoriaId = 1,
-                            descripcion = "Deliciosas hamburguesas con papas",
-                            nombreProducto = "Hamburguesas",
+                            descripcion = "Hamburguesa con tocino, queso, cebolla y salsa barbacoa",
+                            nombreProducto = "Bacon Burger",
+                            precio = 9.9900000000000002
+                        },
+                        new
+                        {
+                            idProducto = 103,
+                            ImageUrl = "",
+                            categoriaId = 2,
+                            descripcion = "Pizza clásica con salsa de tomate, queso mozzarella y hojas de albahaca fresca",
+                            nombreProducto = "Pizza Margarita",
+                            precio = 18.989999999999998
+                        },
+                        new
+                        {
+                            idProducto = 104,
+                            ImageUrl = "",
+                            categoriaId = 2,
+                            descripcion = "Pizza con salsa de tomate, queso mozzarella y pepperoni",
+                            nombreProducto = "Pizza Pepperoni",
+                            precio = 20.989999999999998
+                        },
+                        new
+                        {
+                            idProducto = 105,
+                            ImageUrl = "",
+                            categoriaId = 2,
+                            descripcion = "Pizza con salsa de tomate, queso mozzarella, jamón y piña",
+                            nombreProducto = "Pizza Hawaiana",
+                            precio = 23.0
+                        },
+                        new
+                        {
+                            idProducto = 106,
+                            ImageUrl = "",
+                            categoriaId = 3,
+                            descripcion = "Papas fritas tradicionales con sal y condimentos",
+                            nombreProducto = "Papas Fritas Clásicas",
+                            precio = 6.0
+                        },
+                        new
+                        {
+                            idProducto = 107,
+                            ImageUrl = "",
+                            categoriaId = 3,
+                            descripcion = "Papas fritas cubiertas con queso derretido y salsa especial",
+                            nombreProducto = "Papas Fritas con Queso",
+                            precio = 9.0
+                        },
+                        new
+                        {
+                            idProducto = 108,
+                            ImageUrl = "",
+                            categoriaId = 6,
+                            descripcion = "Una pieza de pollo frito crujiente",
+                            nombreProducto = "Piezas de Pollo",
+                            precio = 4.9900000000000002
+                        },
+                        new
+                        {
+                            idProducto = 109,
+                            ImageUrl = "",
+                            categoriaId = 6,
+                            descripcion = "Tiras de pollo rebozadas y fritas",
+                            nombreProducto = "Tiras de Pollo",
                             precio = 50.0
                         },
                         new
                         {
-                            idProducto = 3,
+                            idProducto = 110,
                             ImageUrl = "",
-                            categoriaId = 1,
-                            descripcion = "Deliciosas hamburguesas con papas",
-                            nombreProducto = "Hamburguesas",
-                            precio = 50.0
+                            categoriaId = 8,
+                            descripcion = "Taco relleno de carne asada, cebolla y cilantro",
+                            nombreProducto = "Taco de Carne Asada",
+                            precio = 18.989999999999998
                         },
                         new
                         {
-                            idProducto = 4,
+                            idProducto = 111,
                             ImageUrl = "",
-                            categoriaId = 1,
-                            descripcion = "Deliciosas hamburguesas con papas",
-                            nombreProducto = "Hamburguesas",
-                            precio = 50.0
+                            categoriaId = 8,
+                            descripcion = "Taco relleno de pollo desmenuzado, lechuga y queso",
+                            nombreProducto = "Taco de Pollo",
+                            precio = 15.99
                         });
                 });
 

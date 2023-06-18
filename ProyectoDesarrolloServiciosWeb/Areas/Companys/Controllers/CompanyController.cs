@@ -6,10 +6,9 @@ using ProyectoDesarrolloServiciosWeb.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using ProyectoDesarrolloServiciosWeb.Utility;
 
-namespace ProyectoDesarrolloServiciosWeb.Areas.Admin.Controllers
+namespace ProyectoDesarrolloServiciosWeb.Areas.Companys.Controllers
 {
-    [Area("Admin")]
-    //[Authorize(Roles = SD.Role_Admin)]
+    [Area("Companys")]
     public class CompanyController : Controller
     {
         /*esta variable solo se puede asignar en el constructor de la clase*/

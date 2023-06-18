@@ -23,17 +23,25 @@ namespace ProyectoDesarrolloServiciosWeb.Models
         [DisplayName("Nombre de Producto")]
         public string? nombreProducto { get; set; }
 
-        [DisplayName("Descripcion de Producto")]
+
+        [Required(ErrorMessage = "La descripción es obligatoria")]
+        [DisplayName("Descripción de Producto")]
         public string? descripcion { get; set; }
 
+        [Required(ErrorMessage = "El precio del producto es obligatorio")]
         [DisplayName("Precio del Producto")]
         public double precio { get; set; }
 
+
+        [Required(ErrorMessage = "La categoría es obligatoria")]
+        [DisplayName("Categoría")]
         public int categoriaId { get; set; }
         [ForeignKey("categoriaId")]
         [ValidateNever]
         public Categoria Categoria { get; set; }
 
+        [Required(ErrorMessage = "La imágen es obligatoria")]
+        [DisplayName("Imágen")]
         [ValidateNever]
         public string ImageUrl { get; set; }
 

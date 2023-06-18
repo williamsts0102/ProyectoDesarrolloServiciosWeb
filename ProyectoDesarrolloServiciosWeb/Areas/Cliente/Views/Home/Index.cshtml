@@ -10,6 +10,7 @@
     }
     .caja{
         background-color:white;
+        height:400px;
     }
     
     
@@ -68,15 +69,15 @@
                 <div class="row p-2">
                     <div class="col-12 p-1">
                         <div class="card border-0 p-3 shadow border-top border-5 rounded caja">
-                            <img src="@producto.ImageUrl" class="card-img-top rounded">
+                            <img src="@producto.ImageUrl" class="card-img-top rounded" width="200" height="200">
                             <div class="card-body pb-0">
                                 <div class="pl-1">
                                     <p class="card-title h5 text-black opacity-75 text-uppercase text-center">@producto.nombreProducto</p>
-                                    <p class="card-title text-warning text-center">Categoría: @producto.Categoria.nombre</p>
+                                    <p class="card-title text-warning text-center"> <strong>Categoría:</strong> @producto.Categoria.nombre</p>
                                 </div>
                                 <div class="pl-1">
                                     <p class="card-title text-black opacity-75 text-center mb-0">
-                                           Precio: @producto.precio.ToString("c")
+                                        <strong> Precio:</strong> @producto.precio.ToString("c")
                                     </p>
                                 </div>
                             </div>

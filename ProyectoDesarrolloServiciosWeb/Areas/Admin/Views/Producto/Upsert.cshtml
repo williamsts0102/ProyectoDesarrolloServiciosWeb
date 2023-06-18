@@ -64,19 +64,19 @@
                             <label asp-for="producto.ImageUrl" class="ms-2"></label>
                         </div>
                         <div class="row pt-2 cajaBtn">
-                            <div class="col-6 col-md-2">
+                            <div class="col-md-2">
                                 @if (Model.producto.idProducto != 0)
                                 {
                                     <button type="submit" class="btn btn-primary" style="width:150px">Actualizar</button>
                                 }
                                 else
                                 {
-                                    <button type="submit" class="btn btn-primary mt-3" style="width:150px">Crear</button>
+                                    <button type="submit" class="btn btn-primary" style="width:150px">Crear</button>
                                 }
                             </div>
-                            <div class="col-6 col-md-2">
-                                <a asp-controller="Producto" asp-action="Index" class="btn btn-primary mx-8" style="width:150px">
-                                    Regresar al Listado
+                            <div class="col-md-2">
+                                <a asp-controller="Producto" asp-action="Index" class="btn btn-primary" style="width:150px">
+                                    Listado
                                 </a>
                             </div>
                         </div>

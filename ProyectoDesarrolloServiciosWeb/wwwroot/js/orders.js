@@ -27,8 +27,10 @@ $(document).ready(function () {
 
 function loadDataTable(status) {
     dataTable =
-        $('#tblData').DataTable({
+        $('#table').DataTable({
             "ajax": { url: '/admin/order/getall?status=' + status },
+            /*por confirmar*/
+            language: { url: '.js/lenguaje-español.js' },
             "columns": [
                 { data: 'id', "width": "15%" },
                 { data: 'nombre', "width": "15%" },

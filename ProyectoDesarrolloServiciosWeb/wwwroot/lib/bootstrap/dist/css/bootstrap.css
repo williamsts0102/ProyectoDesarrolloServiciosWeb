@@ -9029,6 +9029,10 @@ body {
     padding-bottom: 0.1px;
 }
 
+.bg-blanco {
+    background-color: #ff7d01 !important;
+}
+
 .bg-secondary {
     --bs-bg-opacity: 1;
     background-color: rgba(var(--bs-secondary-rgb), var(--bs-bg-opacity)) !important;

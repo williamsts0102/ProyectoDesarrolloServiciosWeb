@@ -99,40 +99,45 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "El correo es obligatorio")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Correo")]
             public string Email { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "La contraseña es obligatoria")]
+            [StringLength(100, ErrorMessage = "Debe tener de 6 a 100 caracteres", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Contraseña")]
             public string Password { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+            [Required(ErrorMessage = "La contraseña es obligatoria")]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar Contraseña")]
+            [Compare("Password", ErrorMessage = "Las contraseñas no coinciden")]
             public string ConfirmPassword { get; set; }
 
-
+            [Required(ErrorMessage = "Role es obligatorio")]
             public string? Role { get; set; }
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "El nombre es obligatorio")]
             public string? Nombre { get; set; }
+            [Required(ErrorMessage = "La dirección es obligatoria")]
             public string? Direccion { get; set; }
+            [Required(ErrorMessage = "La ciudad es obligatoria")]
             public string? Ciudad { get; set; }
+            [Required(ErrorMessage = "El código postal es obligatorio")]
             public string? CodigoPostal { get; set; }
+            [Required(ErrorMessage = "El teléfono es obligatorio")]
             public string? Telefono { get; set; }
 
             public int? CompanyId { get; set; }
@@ -259,7 +264,7 @@ namespace ProyectoDesarrolloServiciosWeb.Areas.Identity.Pages.Account
         {
             if (!_userManager.SupportsUserEmail)
             {
-                throw new NotSupportedException("The default UI requires a user store with email support.");
+                throw new NotSupportedException("La interfaz de usuario predeterminada requiere una tienda de usuarios con soporte de correo electrónico.");
             }
             return (IUserEmailStore<IdentityUser>)_userStore;
         }

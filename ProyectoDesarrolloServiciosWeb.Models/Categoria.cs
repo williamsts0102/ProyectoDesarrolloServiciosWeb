@@ -11,14 +11,16 @@ namespace ProyectoDesarrolloServiciosWeb.Models
         public int idCategoria { get; set; }
 
         /*campo requerido*/
-        [Required(ErrorMessage = "El nombre de la categoria es obligatorio")]
+        [Required(ErrorMessage = "El nombre de la categoría es obligatorio")]
         [MaxLength(38)]
-        [DisplayName("Nombre de Categoria")]
+        [DisplayName("Nombre de Categoría")]
         public string nombre { get; set; }
 
         /*para mostrar el orden en que se mostraran los campos*/
+        [Required(ErrorMessage = "El orden de visualización es obligatorio")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Solo se permiten números en el orden de visualización")]
+        [Range(1, 100, ErrorMessage = "El orden de visualización debe estar en un rango del 1 al 100")]
         [DisplayName("Orden de Visualización")]
-        [Range(1,100, ErrorMessage = "Orden de visualización tiene un rango del 1 al 100")]
         public int DisplayOrder { get; set; }
     }
 }
